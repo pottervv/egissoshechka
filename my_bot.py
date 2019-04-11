@@ -55,6 +55,6 @@ def index():
     </html>
     '''
 if __name__ == "__main__":
-    context = ('server.crt', 'server.key')
-    #app.run(host='0.0.0.0', port=443, debug=True, ssl_context=context)
-    app.run(host='0.0.0.0', debug=True)
+    context = ('ssl/viber.crt', 'ssl/viber.key')
+    app.run(host='0.0.0.0', port=443, debug=True, ssl_context=context)
+    #app.run(host='0.0.0.0', debug=True)
