@@ -20,7 +20,7 @@ viber = Api(BotConfiguration(
 
 
 
-@app.route('/', methods=['POST'])
+@app.route('/viber', methods=['POST'])
 def incoming():
     logging.debug("received request. post data: {0}".format(request.get_data()))
     # every viber message is signed, you can verify the signature using this method
@@ -45,7 +45,16 @@ def incoming():
 
     return Response(status=200)
 
+@app.route('/')
+def index():
+    return ''' 
+    <html>
+    <body>
+    hello world, test viber_bot
+    </body>
+    </html>
+    '''
 if __name__ == "__main__":
     context = ('server.crt', 'server.key')
     #app.run(host='0.0.0.0', port=443, debug=True, ssl_context=context)
-    app.run(host='0.0.0.0', port=443, debug=True)
+    app.run(host='0.0.0.0', debug=True)
