@@ -20,7 +20,7 @@ viber = Api(BotConfiguration(
 
 
 
-@app.route('/viber', methods=['POST'])
+@app.route('/viber', methods=['GET','POST'])
 def incoming():
     logging.debug("received request. post data: {0}".format(request.get_data()))
     # every viber message is signed, you can verify the signature using this method
@@ -41,9 +41,21 @@ def incoming():
             TextMessage(text="thanks for subscribing!")
         ])
     elif isinstance(viber_request, ViberFailedRequest):
-        logging.warn("client failed receiving message. failure: {0}".format(viber_request))
+        logging.warning("client failed receiving message. failure: {0}".format(viber_request))
 
     return Response(status=200)
+
+def set_webhook(viber_bot):
+    viber_bot.set_webhook('https://egissoshechka.herokuapp.com:443')
+    logging.info("Web hook has been set")
+
+@app.route('/incoming', methods=['POST'])
+def incoming_():
+	logging.debug("received request. post data: {0}".format(request.get_data()))
+	# handle the request here
+	return Response(status=200)
+
+
 
 @app.route('/')
 def index():
