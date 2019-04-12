@@ -1,1 +1,1 @@
-web: gunicorn my_bot:app
+worker: python3 my_bot.py
