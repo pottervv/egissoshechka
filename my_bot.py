@@ -47,9 +47,7 @@ def incoming():
 
     return Response(status=200)
 
-    def set_webhook(viber_bot):
-         viber_bot.set_webhook('https://egissoshechka.herokuapp.com:443')
-         logging.info("Web hook has been set")
+
 
 @app.route('/incoming', methods=['POST'])
 def incoming_():
