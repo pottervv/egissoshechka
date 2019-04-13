@@ -18,7 +18,9 @@ viber = Api(BotConfiguration(
     auth_token='496bdc821627d6e3-89019a2a752a3f08-58f225f6ba43594'
 ))
 
-
+viber.set_webhook('https://egissoshecha.herokuapp.com/viber/')
+viber_request = viber.parse_request(request.get_data())
+print(viber_request)
 
 @app.route('/viber', methods=['GET','POST'])
 def incoming():
@@ -45,9 +47,9 @@ def incoming():
 
     return Response(status=200)
 
-def set_webhook(viber_bot):
-    viber_bot.set_webhook('https://egissoshechka.herokuapp.com:443')
-    logging.info("Web hook has been set")
+    def set_webhook(viber_bot):
+         viber_bot.set_webhook('https://egissoshechka.herokuapp.com:443')
+         logging.info("Web hook has been set")
 
 @app.route('/incoming', methods=['POST'])
 def incoming_():
