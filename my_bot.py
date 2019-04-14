@@ -3,13 +3,19 @@ from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
 from viberbot.api.messages import VideoMessage
 from viberbot.api.messages.text_message import TextMessage
-import logging
+
 
 from viberbot.api.viber_requests import ViberConversationStartedRequest
 from viberbot.api.viber_requests import ViberFailedRequest
 from viberbot.api.viber_requests import ViberMessageRequest
 from viberbot.api.viber_requests import ViberSubscribedRequest
 from viberbot.api.viber_requests import ViberUnsubscribedRequest
+
+
+import time
+import logging
+import sched
+import threading
 
 app = Flask(__name__)
 viber = Api(BotConfiguration(
@@ -18,8 +24,9 @@ viber = Api(BotConfiguration(
     auth_token='496bdc821627d6e3-89019a2a752a3f08-58f225f6ba43594'
 ))
 
+def set_webhook(viber):
+    viber.set_webhook('https://egissoshechka.herokuapp.com:443/viber')
 
-viber.set_webhook('https://egissoshechka.herokuapp.com/viber')
 '''
 viber_request = viber.parse_request(request.get_data())
 logging.info("Web hook has been set")
@@ -76,8 +83,13 @@ app.run(host='0.0.0.0', port=443, debug=True, ssl_context=context)
 
 """
 if __name__ == "__main__":
+    scheduler = sched.scheduler(time.time, time.sleep)
+    scheduler.enter(5, 1, set_webhook, (viber,))
+    t = threading.Thread(target=scheduler.run)
+    t.start()
+
     context = ('ssl/viber.crt', 'ssl/viber.key')
     app.run(host='0.0.0.0', port=443, debug=True, ssl_context=context)
-    #app.run(host='0.0.0.0', debug=True)
+
 
 
