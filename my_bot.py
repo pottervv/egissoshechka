@@ -59,7 +59,7 @@ tracking_data=jsonify("""
 """)
 
 def set_webhook(viber):
-    viber.set_webhook('https://egissoshechka.herokuapp.com:443/viber')
+    viber.set_webhook('https://egissoshechka.herokuapp.com:443')
 
 '''
 viber_request = viber.parse_request(request.get_data())
@@ -67,7 +67,7 @@ logging.info("Web hook has been set")
 print(viber_request)
 '''
 
-@app.route('/viber', methods=['POST'])
+@app.route('/', methods=['POST'])
 def incoming():
     logging.debug("received request. post data: {0}".format(request.get_data()))
     # every viber message is signed, you can verify the signature using this method
@@ -84,7 +84,16 @@ def incoming():
 
     if isinstance(viber_request, ViberMessageRequest):
         #message = viber_request.message
-        message= KeyboardMessage(keyboard=keyboard) #TextMessage(text="my text message")
+        message= KeyboardMessage(tracking_data=tracking_data ,keyboard=keyboard) #TextMessage(text="my text message")
+
+        # lets echo back
+        viber.send_messages(viber_request.sender.id, [
+            message
+        ])
+
+    if isinstance(viber_request, ViberMessageRequest):
+        message = viber_request.message
+        #message= KeyboardMessage(keyboard=keyboard) #TextMessage(text="my text message")
 
         # lets echo back
         viber.send_messages(viber_request.sender.id, [
@@ -100,29 +109,7 @@ def incoming():
     return Response(status=200)
 
 
-@app.route('/incoming', methods=['POST'])
-def incoming_():
 
-	logging.debug("received request. post data: {0}".format(request.get_data()))
-	# handle the request here
-	return Response(status=200)
-
-
-
-@app.route('/')
-def index():
-    return ''' 
-    <html>
-    <body>
-    hello world, test viber_bot
-    </body>
-    </html>
-    '''
-""" 
-context = ('ssl/viber.crt', 'ssl/viber.key')
-app.run(host='0.0.0.0', port=443, debug=True, ssl_context=context)
-
-"""
 if __name__ == "__main__":
     scheduler = sched.scheduler(time.time, time.sleep)
     scheduler.enter(5, 1, set_webhook, (viber,))
