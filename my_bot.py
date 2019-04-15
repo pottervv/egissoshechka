@@ -43,12 +43,11 @@ def incoming():
     # this library supplies a simple way to receive a request object
     viber_request = viber.parse_request(request.get_data())
 
-    if isinstance(viber_request, ViberMessageRequest):
-        message = viber_request.message
-        # lets echo back
-        viber.send_messages(viber_request.sender.id, [
-            message
+    if isinstance(viber_request, ViberConversationStartedRequest):
+        viber.send_messages(viber_request.get_user().get_id(), [
+            TextMessage(text="Приветствую Вас! Я помошник по ЕГИССО")
         ])
+
     elif isinstance(viber_request, ViberSubscribedRequest):
         viber.send_messages(viber_request.get_user.id, [
             TextMessage(text="thanks for subscribing!")
