@@ -60,7 +60,7 @@ def incoming():
             }]
         }
     }
-    keyboard=jsonify(keyboard)
+    keyboard=json.loads(keyboard)
 
     tracking_data = {
             "tracking_data": {
@@ -68,7 +68,7 @@ def incoming():
                 "text": "Welcome to our bot!"
             }
         }
-    tracking_data=jsonify(tracking_data)
+    tracking_data=json.loads(tracking_data)
 
     logging.debug("received request. post data: {0}".format(request.get_data()))
     # every viber message is signed, you can verify the signature using this method
