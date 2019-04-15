@@ -115,7 +115,7 @@ def incoming():
 def test_json():
     data="data"
     b="dfg"
-    return print(json.loads("{\"data\":\"b\"}"))
+    return json.loads("{\"data\":\"b\"}")
 
 
 if __name__ == "__main__":
