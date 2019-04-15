@@ -96,7 +96,7 @@ def incoming():
         ])
     '''
     if isinstance(viber_request, ViberMessageRequest):
-        message = TextMessage(text=jsonify({"a":"b"})) #viber_request.message
+        message = TextMessage(text=json.loads("{\"a\":\"b\"}")) #viber_request.message
 
         # lets echo back
         viber.send_messages(viber_request.sender.id, [
