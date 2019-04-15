@@ -43,7 +43,7 @@ keyboard=jsonify(
 			"TextVAlign": "middle",
 			"TextHAlign": "center",
 			"TextOpacity": 60,
-			"TextSize": "regular"
+			"TextSize": '\"regular\"'
 		}]
 	}
  } )
