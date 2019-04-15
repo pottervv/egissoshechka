@@ -1,4 +1,4 @@
-from flask import Flask, request, Response, jsonify
+from flask import Flask, request, Response, jsonify,json
 from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
 from viberbot.api.messages import VideoMessage
@@ -25,36 +25,29 @@ viber = Api(BotConfiguration(
     avatar='http://viber.com/avatar.jpg',
     auth_token='496bdc821627d6e3-89019a2a752a3f08-58f225f6ba43594'
 ))
-keyboard=jsonify(
- {"keyboard": {
-		"DefaultHeight": "true",
-		"BgColor": '\"#FFFFFF\"',
-		"Buttons": [{
-			"Columns": 6,
-			"Rows": 1,
-			"BgColor": '\"#2db9b9\"',
-			"BgMediaType": "gif",
-			"BgMedia": "http://www.url.by/test.gif",
-			"BgLoop": 'true',
-			"ActionType": "open-url",
-			"ActionBody": "www.tut.by",
-			"Image": "www.tut.by/img.jpg",
-			"Text": "Key text",
-			"TextVAlign": "middle",
-			"TextHAlign": "center",
-			"TextOpacity": 60,
-			"TextSize": '\"regular\"'
-		}]
-	}
- } )
+keyboard=json.loads(
+''' {
+	"type": "link",
+	"url": "https://en.wikipedia.org/wiki/Viber",
+	"title": "Interesting article about Viber",
+	"thumbnail": "https://www.viber.com/app/uploads/icon-purple.png",
+	"domain": "www.wikipedia.org",
+	"width": 480,
+	"height": 320,
+	"minApiVersion": 4,
+	"alternativeUrl": "https://www.viber.com/about/",
+	"alternativeText": "About Viber"
+}
+'''
+)
 
-tracking_data=jsonify(
- {
+tracking_data=json.loads(
+ '''{
    "tracking_data":{
    "type":"text",
    "text":"Welcome to our bot!"
    }
-})
+}''')
 
 def set_webhook(viber):
     viber.set_webhook('https://egissoshechka.herokuapp.com:443')
