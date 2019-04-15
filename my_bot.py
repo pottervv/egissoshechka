@@ -111,7 +111,7 @@ def incoming():
     return Response(status=200)
 
 
-@app.run("/test_json")
+@app.route("/test_json")
 def test_json():
     data="data"
     b="dfg"
