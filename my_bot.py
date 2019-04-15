@@ -38,6 +38,38 @@ print(viber_request)
 
 @app.route('/', methods=['POST'])
 def incoming():
+    keyboard= {
+        "keyboard": {
+            "DefaultHeight": 'true',
+            "BgColor": "#FFFFFF",
+            "Buttons": [{
+                "Columns": 6,
+                "Rows": 1,
+                "BgColor": "#2db9b9",
+                "BgMediaType": "gif",
+                "BgMedia": "http://www.url.by/test.gif",
+                "BgLoop": 'true',
+                "ActionType": "open-url",
+                "ActionBody": "www.tut.by",
+                "Image": "www.tut.by/img.jpg",
+                "Text": "Key text",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            }]
+        }
+    }
+    keyboard=jsonify(keyboard)
+
+    tracking_data = {
+            "tracking_data": {
+                "type": "text",
+                "text": "Welcome to our bot!"
+            }
+        }
+    tracking_data=jsonify(tracking_data)
+
     logging.debug("received request. post data: {0}".format(request.get_data()))
     # every viber message is signed, you can verify the signature using this method
     if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
@@ -50,7 +82,7 @@ def incoming():
         viber.send_messages(viber_request.get_user().get_id(), [
             TextMessage(text="Welcome!")
         ])
-    ''' 
+
     if isinstance(viber_request, ViberMessageRequest):
         #message = viber_request.message
         message= KeyboardMessage(tracking_data=tracking_data ,keyboard=keyboard) #TextMessage(text="my text message")
@@ -59,7 +91,7 @@ def incoming():
         viber.send_messages(viber_request.sender.id, [
             message
         ])
-    '''
+
     if isinstance(viber_request, ViberMessageRequest):
         message = viber_request.message
 
