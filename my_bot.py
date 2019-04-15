@@ -1,4 +1,4 @@
-from flask import Flask, request, Response
+from flask import Flask, request, Response, jsonify
 from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
 from viberbot.api.messages import VideoMessage
@@ -25,7 +25,7 @@ viber = Api(BotConfiguration(
     avatar='http://viber.com/avatar.jpg',
     auth_token='496bdc821627d6e3-89019a2a752a3f08-58f225f6ba43594'
 ))
-keyboard=json.loads(""" 
+keyboard=jsonify(""" 
 {"keyboard": {
 		"DefaultHeight": true,
 		"BgColor": "#FFFFFF",
@@ -49,7 +49,7 @@ keyboard=json.loads("""
 }
 """)
 
-tracking_data=json.loads("""
+tracking_data=jsonify("""
  {
    "tracking_data":{
    "type":"text",
