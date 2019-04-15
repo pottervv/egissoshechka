@@ -111,8 +111,15 @@ def incoming():
     return Response(status=200)
 
 
+@app.run("/test_json")
+def test_json():
+    data="data"
+    b="dfg"
+    return print(json.loads("{\"data\":\"b\"}"))
+
 
 if __name__ == "__main__":
+
     scheduler = sched.scheduler(time.time, time.sleep)
     scheduler.enter(5, 1, set_webhook, (viber,))
     t = threading.Thread(target=scheduler.run)
