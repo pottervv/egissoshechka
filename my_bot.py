@@ -61,7 +61,7 @@ def incoming():
         }
     }
     keyboard=json.loads(keyboard)
-
+    print(keyboard)
     tracking_data = {
             "tracking_data": {
                 "type": "text",
@@ -69,7 +69,7 @@ def incoming():
             }
         }
     tracking_data=json.loads(tracking_data)
-
+    print(tracking_data)
     logging.debug("received request. post data: {0}".format(request.get_data()))
     # every viber message is signed, you can verify the signature using this method
     if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
@@ -82,7 +82,7 @@ def incoming():
         viber.send_messages(viber_request.get_user().get_id(), [
             TextMessage(text="Welcome!")
         ])
-
+    '''
     if isinstance(viber_request, ViberMessageRequest):
         #message = viber_request.message
         message= KeyboardMessage(tracking_data=tracking_data ,keyboard=keyboard) #TextMessage(text="my text message")
@@ -91,7 +91,7 @@ def incoming():
         viber.send_messages(viber_request.sender.id, [
             message
         ])
-
+    '''
     if isinstance(viber_request, ViberMessageRequest):
         message = viber_request.message
 
