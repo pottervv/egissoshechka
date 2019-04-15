@@ -24,6 +24,38 @@ viber = Api(BotConfiguration(
     avatar='http://viber.com/avatar.jpg',
     auth_token='496bdc821627d6e3-89019a2a752a3f08-58f225f6ba43594'
 ))
+keyboard=""" 
+"keyboard": {
+		"DefaultHeight": true,
+		"BgColor": "#FFFFFF",
+		"Buttons": [{
+			"Columns": 6,
+			"Rows": 1,
+			"BgColor": "#2db9b9",
+			"BgMediaType": "gif",
+			"BgMedia": "http://www.url.by/test.gif",
+			"BgLoop": true,
+			"ActionType": "open-url",
+			"ActionBody": "www.tut.by",
+			"Image": "www.tut.by/img.jpg",
+			"Text": "Key text",
+			"TextVAlign": "middle",
+			"TextHAlign": "center",
+			"TextOpacity": 60,
+			"TextSize": "regular"
+		}]
+	}
+}
+"""
+
+tracking_data="""
+ {
+   "tracking_data":{
+   "type":"text",
+   "text":"Welcome to our bot!"
+   }
+}
+"""
 
 def set_webhook(viber):
     viber.set_webhook('https://egissoshechka.herokuapp.com:443/viber')
@@ -50,8 +82,8 @@ def incoming():
         ])
 
     if isinstance(viber_request, ViberMessageRequest):
-        message = viber_request.message
-        #message= KeyboardMessage(tracking_data=tracking_data, keyboard=keyboard) #TextMessage(text="my text message")
+        #message = viber_request.message
+        message= KeyboardMessage(tracking_data=tracking_data, keyboard=keyboard) #TextMessage(text="my text message")
 
         # lets echo back
         viber.send_messages(viber_request.sender.id, [
@@ -63,8 +95,6 @@ def incoming():
         ])
     elif isinstance(viber_request, ViberFailedRequest):
         logging.warning("client failed receiving message. failure: {0}".format(viber_request))
-
-
 
     return Response(status=200)
 
