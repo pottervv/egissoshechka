@@ -84,7 +84,7 @@ def incoming():
 
     if isinstance(viber_request, ViberMessageRequest):
         #message = viber_request.message
-        message= KeyboardMessage() #TextMessage(text="my text message")
+        message= KeyboardMessage(keyboard=keyboard) #TextMessage(text="my text message")
 
         # lets echo back
         viber.send_messages(viber_request.sender.id, [
