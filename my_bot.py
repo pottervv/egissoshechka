@@ -38,6 +38,7 @@ print(viber_request)
 
 @app.route('/', methods=['POST'])
 def incoming():
+    '''
     keyboard= {
         "keyboard": {
             "DefaultHeight": 'true',
@@ -70,6 +71,7 @@ def incoming():
         }
     tracking_data=json.loads(tracking_data)
     print(tracking_data)
+    '''
     logging.debug("received request. post data: {0}".format(request.get_data()))
     # every viber message is signed, you can verify the signature using this method
     if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
