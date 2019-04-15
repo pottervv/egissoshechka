@@ -25,7 +25,7 @@ viber = Api(BotConfiguration(
     avatar='http://viber.com/avatar.jpg',
     auth_token='496bdc821627d6e3-89019a2a752a3f08-58f225f6ba43594'
 ))
-keyboard=""" 
+keyboard=json.loads(""" 
 {"keyboard": {
 		"DefaultHeight": true,
 		"BgColor": "#FFFFFF",
@@ -47,16 +47,16 @@ keyboard="""
 		}]
 	}
 }
-"""
+""")
 
-tracking_data="""
+tracking_data=json.loads("""
  {
    "tracking_data":{
    "type":"text",
    "text":"Welcome to our bot!"
    }
 }
-"""
+""")
 
 def set_webhook(viber):
     viber.set_webhook('https://egissoshechka.herokuapp.com:443/viber')
@@ -83,8 +83,8 @@ def incoming():
         ])
 
     if isinstance(viber_request, ViberMessageRequest):
-        #message = viber_request.message
-        message= KeyboardMessage(tracking_data=tracking_data, keyboard=keyboard) #TextMessage(text="my text message")
+        message = viber_request.message
+        #message= KeyboardMessage(tracking_data=tracking_data, keyboard=keyboard) #TextMessage(text="my text message")
 
         # lets echo back
         viber.send_messages(viber_request.sender.id, [
