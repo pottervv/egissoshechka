@@ -95,7 +95,7 @@ def incoming():
         ])
     """
     if isinstance(viber_request, ViberMessageRequest):
-        message = TextMessage(text="") #viber_request.message
+        message = TextMessage(text="hello") #viber_request.message
 
         # lets echo back
         viber.send_messages(viber_request.sender.id, [
