@@ -17,6 +17,7 @@ import time
 import logging
 import sched
 import threading
+import json
 
 app = Flask(__name__)
 viber = Api(BotConfiguration(
@@ -25,7 +26,7 @@ viber = Api(BotConfiguration(
     auth_token='496bdc821627d6e3-89019a2a752a3f08-58f225f6ba43594'
 ))
 keyboard=""" 
-"keyboard": {
+{"keyboard": {
 		"DefaultHeight": true,
 		"BgColor": "#FFFFFF",
 		"Buttons": [{
