@@ -3,6 +3,7 @@ from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
 from viberbot.api.messages import VideoMessage
 from viberbot.api.messages.text_message import TextMessage
+from viberbot.api.messages.keyboard_message import KeyboardMessage
 
 
 from viberbot.api.viber_requests import ViberConversationStartedRequest
@@ -43,9 +44,15 @@ def incoming():
     # this library supplies a simple way to receive a request object
     viber_request = viber.parse_request(request.get_data())
 
+    if isinstance(viber_request, ViberConversationStartedRequest):
+        viber.send_messages(viber_request.get_user().get_id(), [
+            TextMessage(text="Welcome!")
+        ])
+
     if isinstance(viber_request, ViberMessageRequest):
-        #message = viber_request.message
-        message=TextMessage(text="my text message")
+        message = viber_request.message
+        #message= KeyboardMessage(tracking_data=tracking_data, keyboard=keyboard) #TextMessage(text="my text message")
+
         # lets echo back
         viber.send_messages(viber_request.sender.id, [
             message
@@ -56,6 +63,8 @@ def incoming():
         ])
     elif isinstance(viber_request, ViberFailedRequest):
         logging.warning("client failed receiving message. failure: {0}".format(viber_request))
+
+
 
     return Response(status=200)
 
