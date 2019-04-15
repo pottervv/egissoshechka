@@ -84,7 +84,7 @@ def incoming():
         viber.send_messages(viber_request.get_user().get_id(), [
             TextMessage(text="Welcome!")
         ])
-
+    """
     if isinstance(viber_request, ViberMessageRequest):
         #message = viber_request.message
         message= KeyboardMessage(tracking_data=tracking_data ,keyboard=keyboard) #TextMessage(text="my text message")
@@ -93,7 +93,7 @@ def incoming():
         viber.send_messages(viber_request.sender.id, [
             message
         ])
-
+    """
     if isinstance(viber_request, ViberMessageRequest):
         message = TextMessage(text="") #viber_request.message
 
