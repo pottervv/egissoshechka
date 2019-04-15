@@ -29,6 +29,7 @@ viber = Api(BotConfiguration(
 
 def set_webhook(viber):
     viber.set_webhook('https://egissoshechka.herokuapp.com:443')
+    logging.info("Web hook has been set")
 
 '''
 viber_request = viber.parse_request(request.get_data())
@@ -95,7 +96,7 @@ def incoming():
         ])
     '''
     if isinstance(viber_request, ViberMessageRequest):
-        message = viber_request.message
+        message = TextMessage(text=str(jsonify({"a":"b"}))) #viber_request.message
 
         # lets echo back
         viber.send_messages(viber_request.sender.id, [
