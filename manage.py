@@ -1,9 +1,9 @@
-from .app import app
-from .app import time
-from .app import set_webhook
-from .app import threading
-from .app import sched
-from .app import viber
+from egissoshechka.app import app
+from egissoshechka.app import time
+from egissoshechka.app import set_webhook
+from egissoshechka.app import threading
+from egissoshechka.app import sched
+from egissoshechka.app import viber
 
 if __name__ == '__main__':
     scheduler = sched.scheduler(time.time, time.sleep)

@@ -1,15 +1,15 @@
-from ..app import request, Response, jsonify, json, app
-from ..app import Api
-from ..app import viber
-from ..app import TextMessage
-from ..app import VideoMessage
-from ..app import logging
-from ..app import ViberConversationStartedRequest
+from egissoshechka.app import request, Response, jsonify, json, app
+from egissoshechka.app import Api
+from egissoshechka.app import viber
+from egissoshechka.app import TextMessage
+from egissoshechka.app import VideoMessage
+from egissoshechka.app import logging
+from egissoshechka.app import ViberConversationStartedRequest
 
-from ..app import ViberFailedRequest
-from ..app import ViberMessageRequest
-from ..app import ViberSubscribedRequest
-from ..app import ViberUnsubscribedRequest
+from egissoshechka.app import ViberFailedRequest
+from egissoshechka.app import ViberMessageRequest
+from egissoshechka.app import ViberSubscribedRequest
+from egissoshechka.app import ViberUnsubscribedRequest
 @app.route('/', methods=['POST'])
 def incoming():
 
