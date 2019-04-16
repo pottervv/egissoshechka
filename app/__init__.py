@@ -4,7 +4,7 @@ __init__.py
 импортированного из пакета flask
 """
 from flask import Flask, request, Response, jsonify,json
-from egissoshechka.config import *
+from ..config import *
 from viberbot import Api
 
 from viberbot.api.bot_configuration import BotConfiguration

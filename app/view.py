@@ -1,16 +1,15 @@
-from egissoshechka.app import app
-from egissoshechka.app import request, Response, jsonify,json
-from egissoshechka.app import Api
-from egissoshechka.app import viber
-from egissoshechka.app import TextMessage
-from egissoshechka.app import VideoMessage
-from egissoshechka.app import logging
-from egissoshechka.app import ViberConversationStartedRequest
+from ..app import request, Response, jsonify, json, app
+from ..app import Api
+from ..app import viber
+from ..app import TextMessage
+from ..app import VideoMessage
+from ..app import logging
+from ..app import ViberConversationStartedRequest
 
-from egissoshechka.app import ViberFailedRequest
-from egissoshechka.app import ViberMessageRequest
-from egissoshechka.app import ViberSubscribedRequest
-from egissoshechka.app import ViberUnsubscribedRequest
+from ..app import ViberFailedRequest
+from ..app import ViberMessageRequest
+from ..app import ViberSubscribedRequest
+from ..app import ViberUnsubscribedRequest
 @app.route('/', methods=['POST'])
 def incoming():
 
@@ -69,7 +68,7 @@ def incoming():
         ])
     """
     if isinstance(viber_request, ViberMessageRequest):
-        message = TextMessage(text="hello") #viber_request.message
+        message = viber_request.message
 
         # lets echo back
         viber.send_messages(viber_request.sender.id, [
