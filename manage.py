@@ -1,5 +1,5 @@
-from egissoshechka.app import app
-from egissoshechka.app import time
+from egissoshechka import app
+from app import time
 from egissoshechka.app import set_webhook
 from egissoshechka.app import threading
 from egissoshechka.app import sched
