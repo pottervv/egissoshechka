@@ -1,1 +1,1 @@
-web: gunicorn my_bot:app
+web: gunicorn manage:app
