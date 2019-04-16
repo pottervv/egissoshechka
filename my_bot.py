@@ -79,7 +79,7 @@ def incoming():
 
     # this library supplies a simple way to receive a request object
     viber_request = viber.parse_request(request.get_data())
-
+    #viber_request=viber.parse_request(request)
     if isinstance(viber_request, ViberConversationStartedRequest):
         viber.send_messages(viber_request.get_user().get_id(), [
             TextMessage(text="Welcome!")
@@ -87,13 +87,13 @@ def incoming():
 
     if isinstance(viber_request, ViberMessageRequest):
         message = viber_request.message
-        viber.post_messages_to_public_account(viber_request.get_sender().get_id(),[message])
+        viber.post_messages_to_public_account(viber_request.sender.id,[message])
 
 
             #message= KeyboardMessage(tracking_data=tracking_data ,keyboard=keyboard) #TextMessage(text="my text message")
 
          # lets echo back
-        #iber.send_messages(viber_request.sender.id, [message])
+        #viber.send_messages(viber_request.sender.id, [message])
 
     if isinstance(viber_request, ViberMessageRequest):
         viber.send_messages(to=viber_request.get_sender().get_id(),
