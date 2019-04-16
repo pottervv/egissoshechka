@@ -95,12 +95,15 @@ def incoming():
         ])
     """
     if isinstance(viber_request, ViberMessageRequest):
-        message = TextMessage(text="hello") #viber_request.message
+        viber.send_messages(to=viber_request.get_sender().get_id(),
+                            messages=[TextMessage(text="sample message")])
+        ''' message = TextMessage(text="hello") #viber_request.message
 
         # lets echo back
         viber.send_messages(viber_request.sender.id, [
             message
         ])
+        '''
     elif isinstance(viber_request, ViberSubscribedRequest):
         viber.send_messages(viber_request.get_user.id, [
             TextMessage(text="thanks for subscribing!")
