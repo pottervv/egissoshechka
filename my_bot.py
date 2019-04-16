@@ -80,10 +80,7 @@ def incoming():
     # this library supplies a simple way to receive a request object
     viber_request = viber.parse_request(request.get_data())
     #viber_request=viber.parse_request(request)
-    if isinstance(viber_request, ViberConversationStartedRequest):
-        viber.send_messages(viber_request.get_user().get_id(), [
-            TextMessage(text="Welcome!")
-        ])
+
 
     if isinstance(viber_request, ViberMessageRequest):
         message = viber_request.message
@@ -95,9 +92,7 @@ def incoming():
          # lets echo back
         #viber.send_messages(viber_request.sender.id, [message])
 
-    if isinstance(viber_request, ViberMessageRequest):
-        viber.send_messages(to=viber_request.get_sender().get_id(),
-                            messages=[TextMessage(text="sample message")])
+
         ''' message = TextMessage(text="hello") #viber_request.message
 
         # lets echo back
@@ -105,12 +100,14 @@ def incoming():
             message
         ])
         '''
-    elif isinstance(viber_request, ViberSubscribedRequest):
-        viber.send_messages(viber_request.get_user.id, [
-            TextMessage(text="thanks for subscribing!")
-        ])
+
+    elif isinstance(viber_request, ViberConversationStartedRequest) \
+             or isinstance(viber_request, ViberSubscribedRequest) \
+             or isinstance(viber_request, ViberUnsubscribedRequest):
+             viber.send_messages(viber_request.sender.id, [ TextMessage(None, None, viber_request.get_event_type())])
     elif isinstance(viber_request, ViberFailedRequest):
         logging.warning("client failed receiving message. failure: {0}".format(viber_request))
+
 
     return Response(status=200)
 
