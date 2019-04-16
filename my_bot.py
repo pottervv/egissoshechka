@@ -84,16 +84,18 @@ def incoming():
         viber.send_messages(viber_request.get_user().get_id(), [
             TextMessage(text="Welcome!")
         ])
-    """
-    if isinstance(viber_request, ViberMessageRequest):
-        #message = viber_request.message
-        message= KeyboardMessage(tracking_data=tracking_data ,keyboard=keyboard) #TextMessage(text="my text message")
 
-        # lets echo back
-        viber.send_messages(viber_request.sender.id, [
-            message
-        ])
-    """
+    if isinstance(viber_request, ViberMessageRequest):
+        viber.post_messages_to_public_account(sender=viber_request.get_sender().get_id(),
+                                              messages=[TextMessage(text="sample message")])
+        """  #message = viber_request.message
+  message= KeyboardMessage(tracking_data=tracking_data ,keyboard=keyboard) #TextMessage(text="my text message")
+
+  # lets echo back
+  viber.send_messages(viber_request.sender.id, [
+      message
+  ])
+"""
     if isinstance(viber_request, ViberMessageRequest):
         viber.send_messages(to=viber_request.get_sender().get_id(),
                             messages=[TextMessage(text="sample message")])
