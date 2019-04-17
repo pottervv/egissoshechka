@@ -37,12 +37,34 @@ viber_request = viber.parse_request(request.get_data())
 logging.info("Web hook has been set")
 print(viber_request)
 '''
+def get_json():
+    s={
+   "receiver":"01234567890A=",
+   "type":"text",
+   "text":"Hello world",
+   "keyboard":{
+      "Type":"keyboard",
+      "DefaultHeight":True,
+      "Buttons":[
+         {
+            "ActionType":"reply",
+            "ActionBody":"reply to me",
+            "Text":"Key text",
+            "TextSize":"regular"
+         }
+         ]
+         }
+         }
+    return s
+
 
 @app.route('/', methods=['POST'])
 def incoming():
 
-    keyboard={
+    keyboard={"keyboard":{
+            "type":"keyboard",
             "DefaultHeight": True,
+            "InputFieldState":"hidden",
             "BgColor": "#FFFFFF",
             "Buttons": [{
                 "Columns": 6,
@@ -60,9 +82,8 @@ def incoming():
                 "TextOpacity": 60,
                 "TextSize": "regular"
             }]
-        }
+        }}
 
-    keyboard=json.JSONEncoder().encode(keyboard)
 
 
     tracking_data =  """{
@@ -85,12 +106,11 @@ def incoming():
 
     if isinstance(viber_request, ViberMessageRequest):
         #message = viber_request.message
-        message = TextMessage(text="hello")
+        message = TextMessage(keyboard=keyboard,text="hello")
         viber.send_messages(viber_request.sender.id,[message])
         #viber.post_messages_to_public_account(viber_request.sender,[message])
         #viber.send_messages(viber_request.sender.id,[viber.get_account_info()])
-
-            #message= KeyboardMessage(tracking_data=tracking_data ,keyboard=keyboard) #TextMessage(text="my text message")
+        #message= KeyboardMessage(tracking_data=tracking_data ,keyboard=keyboard) #TextMessage(text="my text message")
 
          # lets echo back
         #viber.send_messages(viber_request.sender.id, [message])
