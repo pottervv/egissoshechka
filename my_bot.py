@@ -118,15 +118,14 @@ def incoming():
 
 
     elif isinstance(viber_request, ViberSubscribedRequest):
-             #viber.send_messages(viber_request.sender.id, [TextMessage(viber_request.get_event_type())])
+             #viber.send_messages(viber_request.get_user().get_id(), [TextMessage(viber_request.get_event_type())])
              viber.send_messages(viber_request.get_user().get_id(),
                                  [TextMessage(text="Здравствуйте! Вас приветствует бот helpegisso. Все о мире ЕГИССО")])
-
-             logger.debug("viber_request.get_event_type():{0}".format(viber_request.get_event_type()))
+             logger.debug("1_viber_request.get_event_type():{0}".format(viber_request.get_event_type()))
 
     elif isinstance(viber_request, ViberUnsubscribedRequest):
         viber.send_messages(viber_request.get_user().get_id(), [TextMessage(text="Вы отписались!")])
-
+        logger.debug("1_viber_request.get_event_type():{0}".format(viber_request.get_event_type()))
 
     elif isinstance(viber_request, ViberFailedRequest):
         logger.warning("client failed receiving message. failure: {0}".format(viber_request))
