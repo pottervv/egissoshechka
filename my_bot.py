@@ -85,7 +85,7 @@ def incoming():
 
     if isinstance(viber_request, ViberMessageRequest):
         #message = viber_request.message
-        message = TextMessage(keyboard=keyboard,text="hello")
+        message = TextMessage(text="hello")
         viber.send_messages(viber_request.sender.id,[message])
         #viber.post_messages_to_public_account(viber_request.sender,[message])
         #viber.send_messages(viber_request.sender.id,[viber.get_account_info()])
@@ -108,6 +108,7 @@ def incoming():
              or isinstance(viber_request, ViberSubscribedRequest) \
              or isinstance(viber_request, ViberUnsubscribedRequest):
              viber.send_messages(viber_request.sender.id, [ TextMessage(None, None, viber_request.get_event_type())])
+             viber.send_messages(viber_request.sender.id, [TextMessage(text="Здравствуйте! Вас приветствует ботhelpegisso. Все о мире ЕГИССО")])
     elif isinstance(viber_request, ViberFailedRequest):
         logging.warning("client failed receiving message. failure: {0}".format(viber_request))
 
