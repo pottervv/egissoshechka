@@ -18,6 +18,7 @@ import logging
 import sched
 import threading
 import json
+import simplejson as s_json
 
 app = Flask(__name__)
 viber = Api(BotConfiguration(
@@ -61,7 +62,7 @@ def incoming():
             }]
         }"""
 
-    keyboard=jsonify(keyboard=keyboard)
+    keyboard=s_json.loads(keyboard)
 
 
     tracking_data =  """{
@@ -83,7 +84,8 @@ def incoming():
 
 
     if isinstance(viber_request, ViberMessageRequest):
-        message = viber_request.message
+        #message = viber_request.message
+        message = TextMessage(keyboard=keyboard,text="hello")
         viber.send_messages(viber_request.sender.id,[message])
         #viber.post_messages_to_public_account(viber_request.sender,[message])
         #viber.send_messages(viber_request.sender.id,[viber.get_account_info()])

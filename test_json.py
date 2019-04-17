@@ -1,4 +1,5 @@
 from  flask import Flask
+import simplejson as s_json
 
 from flask import jsonify
 import json
@@ -28,9 +29,35 @@ keyboard="""{
 		    }]
 	    }
         """
+"""
+keyboard={
+		"DefaultHeight": '\'true\'',
+		"BgColor": "#FFFFFF",
+		"Buttons": [{
+			"Columns": 6,
+			"Rows": 1,
+			"BgColor": "#2db9b9",
+			"BgMediaType": "gif",
+			"BgMedia": "http://www.url.by/test.gif",
+			"BgLoop": '\'true\'',
+			"ActionType": "open-url",
+			"ActionBody": "www.tut.by",
+			"Image": "www.tut.by/img.jpg",
+			"Text": "Key text",
+			"TextVAlign": "middle",
+			"TextHAlign": "center",
+			"TextOpacity": 60,
+			"TextSize": "regular"
+		    }]
+	    }
+"""
 
-@app.route('/',methods=['GET'])
+
+@app.route('/')
 def get_current_user():
-    return json.loads(keyboard)
+    k=s_json.loads(keyboard)
+    print(k)
+    return """ <html><body>
+    </body></html>"""
 if __name__=="__main__":
     app.run()
