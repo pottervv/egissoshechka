@@ -62,7 +62,7 @@ def incoming():
             }]
         }"""
 
-    keyboard=s_json.loads(keyboard)
+    keyboard=s_json.dumps(keyboard)
 
 
     tracking_data =  """{
