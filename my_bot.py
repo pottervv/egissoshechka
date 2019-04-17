@@ -106,12 +106,13 @@ def incoming():
 
     if isinstance(viber_request, ViberMessageRequest):
         #message = viber_request.message
-        message = TextMessage(keyboard=s_json.load(keyboard),text="hello")
-        viber.send_messages(viber_request.sender.id,[message])
+        #message = TextMessage(text="hello")
+        #viber.send_messages(viber_request.sender.id,[message])
         #viber.post_messages_to_public_account(viber_request.sender,[message])
         #viber.send_messages(viber_request.sender.id,[viber.get_account_info()])
         #message= KeyboardMessage(tracking_data=tracking_data ,keyboard=keyboard) #TextMessage(text="my text message")
-
+        viber.send_messages(to=viber_request.get_sender().get_id(),
+                            messages=[TextMessage(text="sample message")])
          # lets echo back
         #viber.send_messages(viber_request.sender.id, [message])
 
