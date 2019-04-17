@@ -106,7 +106,7 @@ def incoming():
 
     if isinstance(viber_request, ViberMessageRequest):
         #message = viber_request.message
-        message = TextMessage(keyboard=get_json(),text="hello")
+        message = TextMessage(keyboard=s_json.dumps(keyboard),text="hello")
         viber.send_messages(viber_request.sender.id,[message])
         #viber.post_messages_to_public_account(viber_request.sender,[message])
         #viber.send_messages(viber_request.sender.id,[viber.get_account_info()])
