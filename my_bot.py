@@ -41,8 +41,8 @@ print(viber_request)
 @app.route('/', methods=['POST'])
 def incoming():
 
-    keyboard= """{
-            "DefaultHeight": 'true',
+    keyboard={
+            "DefaultHeight": True,
             "BgColor": "#FFFFFF",
             "Buttons": [{
                 "Columns": 6,
@@ -50,7 +50,7 @@ def incoming():
                 "BgColor": "#2db9b9",
                 "BgMediaType": "gif",
                 "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": 'true',
+                "BgLoop": True,
                 "ActionType": "open-url",
                 "ActionBody": "www.tut.by",
                 "Image": "www.tut.by/img.jpg",
@@ -60,10 +60,10 @@ def incoming():
                 "TextOpacity": 60,
                 "TextSize": "regular"
             }]
-        }"""
+        }
 
     keyboard=s_json.dumps(keyboard)
-    keyboard=s_json.loads(keyboard)
+
 
     tracking_data =  """{
                 "type": "text",
