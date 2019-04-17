@@ -83,9 +83,10 @@ def incoming():
 
 
     if isinstance(viber_request, ViberMessageRequest):
-        message = viber_request.message
-        viber.post_messages_to_public_account(viber_request.sender,[message])
-
+        message = viber_request.chat_id
+        viber.send_messages(viber_request.sender.id,[message])
+        #viber.post_messages_to_public_account(viber_request.sender,[message])
+        viber.send_messages(viber_request.sender.id,[viber.get_account_info()])
 
             #message= KeyboardMessage(tracking_data=tracking_data ,keyboard=keyboard) #TextMessage(text="my text message")
 
