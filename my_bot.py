@@ -20,6 +20,13 @@ import threading
 import json
 import simplejson as s_json
 
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+handler = logging.StreamHandler()
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+
 app = Flask(__name__)
 viber = Api(BotConfiguration(
     name='helpegisso',
@@ -91,46 +98,31 @@ def incoming():
                 "text": "Welcome to our bot!"
                  }"""
 
-    tracking_data=jsonify(tracking_data=tracking_data)
 
 
-    logging.debug("received request. post data: {0}".format(request.get_data()))
+
+    logger.debug("received request. post data: {0}".format(request.get_data()))
     # every viber message is signed, you can verify the signature using this method
     if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
         return Response(status=403)
 
     # this library supplies a simple way to receive a request object
     viber_request = viber.parse_request(request.get_data())
-    #viber_request=viber.parse_request(request)
+
 
 
     if isinstance(viber_request, ViberMessageRequest):
-        #message = viber_request.message
-        #message = TextMessage(text="hello")
-        #viber.send_messages(viber_request.sender.id,[message])
-        #viber.post_messages_to_public_account(viber_request.sender,[message])
-        #viber.send_messages(viber_request.sender.id,[viber.get_account_info()])
-        #message= KeyboardMessage(tracking_data=tracking_data ,keyboard=keyboard) #TextMessage(text="my text message")
-        viber.send_messages(to=viber_request.sender.id,
+       viber.send_messages(to=viber_request.sender.id,
                             messages=[TextMessage(text="sample message")])
-         # lets echo back
-        #viber.send_messages(viber_request.sender.id, [message])
 
-
-        ''' message = TextMessage(text="hello") #viber_request.message
-
-        # lets echo back
-        viber.send_messages(viber_request.sender.id, [
-            message
-        ])
-        '''
 
     elif     isinstance(viber_request, ViberSubscribedRequest) \
              or isinstance(viber_request, ViberUnsubscribedRequest):
-             #viber.send_messages(viber_request.sender.id, [ TextMessage(None, None, viber_request.get_event_type())])
-             viber.send_messages(viber_request.user_id, [TextMessage(text="Здравствуйте! Вас приветствует ботhelpegisso. Все о мире ЕГИССО")])
+             viber.send_messages(viber_request.sender.id, [TextMessage(viber_request.get_event_type())])
+             logger.warning("viber_request.get_event_type():{0}".format(viber_request.get_event_type()))
+             #viber.send_messages(viber_request, [TextMessage(text="Здравствуйте! Вас приветствует ботhelpegisso. Все о мире ЕГИССО")])
     elif isinstance(viber_request, ViberFailedRequest):
-        logging.warning("client failed receiving message. failure: {0}".format(viber_request))
+        logger.warning("client failed receiving message. failure: {0}".format(viber_request))
 
 
     return Response(status=200)
