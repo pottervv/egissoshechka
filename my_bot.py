@@ -113,11 +113,7 @@ def incoming():
         viber.send_messages(viber_request.user.id, [ TextMessage(text="Здравствуйте! Вас приветствует бот helpegisso. Все о мире ЕГИССО")])
         logger.debug(" viber_request.get_user().get_id()-{0}".format(viber_request.user.id))
 
-    elif isinstance(viber_request, ViberMessageRequest):
-       viber.send_messages(to=viber_request.sender.id,messages=[TextMessage(text="sample message")])
-
-
-    if isinstance(viber_request, ViberSubscribedRequest):
+    elif isinstance(viber_request, ViberSubscribedRequest):
              #viber.send_messages(viber_request.user.id, viber_request.get_event_type())
              viber.send_messages(viber_request.user_id,[TextMessage(text="Спасибо за подписку!")])
              logger.debug("_viber_request.get_event_type():{0}".format(viber_request.get_event_type()))
@@ -129,6 +125,9 @@ def incoming():
 
     elif isinstance(viber_request, ViberFailedRequest):
         logger.warning("client failed receiving message. failure: {0}".format(viber_request))
+
+    elif isinstance(viber_request, ViberMessageRequest):
+       viber.send_messages(to=viber_request.sender.id,messages=[TextMessage(text="С Вами так интересно")])
 
 
     return Response(status=200)
