@@ -1,1 +1,1 @@
-web: gunicorn my_bot:app
+web: python helpegisso.py
