@@ -128,8 +128,8 @@ def incoming():
         logger.warning("client failed receiving message. failure: {0}".format(viber_request))
 
 
-    #elif isinstance(viber_request, ViberMessageRequest):
-     #  viber.send_messages(to=viber_request.sender.id,messages=[TextMessage(text="С Вами так интересно")])
+    if isinstance(viber_request, ViberMessageRequest):
+       viber.send_messages(to=viber_request.sender.id, messages=[TextMessage(text="С Вами так интересно")])
 
 
     return Response(status=200)
