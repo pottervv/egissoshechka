@@ -119,12 +119,12 @@ def incoming():
 
     elif isinstance(viber_request, ViberSubscribedRequest):
              #viber.send_messages(viber_request.user.id, viber_request.get_event_type())
-             viber.send_messages(viber_request.user.id,[TextMessage(text="Вы подписаны на бота helpegisso")])
+             viber.send_messages(viber_request.user_id,[TextMessage(text="Спасибо за подписку!")])
              logger.debug("_viber_request.get_event_type():{0}".format(viber_request.get_event_type()))
 
     elif isinstance(viber_request, ViberUnsubscribedRequest):
-        viber.send_messages(viber_request.user.id, viber_request.get_event_type())
-        #viber.send_messages(viber_request.user.id, [TextMessage(text="Вы отписались!")])
+        #viber.send_messages(viber_request.user_id, viber_request.get_event_type())
+        viber.send_messages(viber_request.user_id, [TextMessage(text="Вы отписались!")])
         logger.debug("1_viber_request.get_event_type():{0}".format(viber_request.get_event_type()))
 
     elif isinstance(viber_request, ViberFailedRequest):
