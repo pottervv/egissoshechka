@@ -17,7 +17,7 @@ import time
 import logging
 import sched
 import threading
-import keyboards
+#import keyboards
 import json
 import simplejson as s_json
 
