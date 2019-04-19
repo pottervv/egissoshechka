@@ -40,65 +40,29 @@ def set_webhook(viber):
     viber.set_webhook('https://egissoshechka.herokuapp.com:443')
     logging.info("Web hook has been set")
 
-'''
-viber_request = viber.parse_request(request.get_data())
-logging.info("Web hook has been set")
-print(viber_request)
-'''
-def get_json():
-    s={
-   "receiver":"01234567890A=",
-   "type":"text",
-   "text":"Hello world",
-   "keyboard":{
-      "Type":"keyboard",
-      "DefaultHeight":True,
-      "Buttons":[
-         {
-            "ActionType":"reply",
-            "ActionBody":"reply to me",
-            "Text":"Key text",
-            "TextSize":"regular"
-         }
-         ]
-         }
-         }
-    return s
-
-
 @app.route('/', methods=['POST'])
 def incoming():
 
     keyboard={
-            "type":"keyboard",
-            "DefaultHeight": True,
-            "InputFieldState":"hidden",
-            "BgColor": "#FFFFFF",
-            "Buttons": [{
-                "Columns": 6,
-                "Rows": 1,
-                "BgColor": "#2db9b9",
-                "BgMediaType": "gif",
-                "BgMedia": "http://www.url.by/test.gif",
-                "BgLoop": True,
-                "ActionType": "open-url",
-                "ActionBody": "www.tut.by",
-                "Image": "www.tut.by/img.jpg",
-                "Text": "Key text",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            }]
-        }
+	"type": "link",
+	"url": "https://en.wikipedia.org/wiki/Viber",
+	"title": "Interesting article about Viber",
+	"thumbnail": "https://www.viber.com/app/uploads/icon-purple.png",
+	"domain": "www.wikipedia.org",
+	"width": 480,
+	"height": 320,
+	"minApiVersion": 4,
+	"alternativeUrl": "https://www.egisso.ru",
+	"alternativeText": "О боте helpegisso"
+}
+    keyboard=jsonify(keyboard)
 
-
-
-    tracking_data =  """{
+    """ 
+    tracking_data =  {
                 "type": "text",
                 "text": "Welcome to our bot!"
-                 }"""
-
+                 }
+    """
 
 
 
@@ -129,7 +93,8 @@ def incoming():
 
 
     if isinstance(viber_request, ViberMessageRequest):
-       viber.send_messages(to=viber_request.sender.id, messages=[TextMessage(text="".join([viber.name,"С Вами так интересно"]))])
+       viber.send_messages(to=viber_request.sender.id, messages=[TextMessage(text="".join([viber_request.sender.user," c Вами так интересно"]),
+                                                                             keyboard=keyboard)])
 
 
     return Response(status=200)
