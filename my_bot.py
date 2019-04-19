@@ -97,7 +97,7 @@ def incoming():
        keyboard = json.dumps(keyboardDict)
        viber.send_messages(to=viber_request.sender.id,
                            messages=[TextMessage(text="".join([viber_request.sender.id," c Вами так интересно"]),
-                                                 keyboard=jsonify("type:link"))])
+                                                 keyboard=jsonify({"type":"link"}))])
 
 
     return Response(status=200)
