@@ -55,7 +55,7 @@ def incoming():
 	"alternativeUrl": "https://www.egisso.ru",
 	"alternativeText": "О боте helpegisso"
 }
-    keyboard=jsonify(keyboard)
+    keyboard=json.dumps(keyboard)
 
     """ 
     tracking_data =  {
