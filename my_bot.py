@@ -35,6 +35,19 @@ viber = Api(BotConfiguration(
     auth_token='496bdc821627d6e3-89019a2a752a3f08-58f225f6ba43594'
 ))
 
+keyboardDict ={
+    "type": "link",
+    "url": "https://en.wikipedia.org/wiki/Viber",
+    "title": "Interesting article about Viber",
+    "thumbnail": "https://www.viber.com/app/uploads/icon-purple.png",
+    "domain": "www.wikipedia.org",
+    "width": 480,
+    "height": 320,
+    "minApiVersion": 4,
+    "alternativeUrl": "https://www.egisso.ru",
+    "alternativeText": "О боте helpegisso"
+}
+
 
 def set_webhook(viber):
     viber.set_webhook('https://egissoshechka.herokuapp.com:443')
@@ -42,20 +55,7 @@ def set_webhook(viber):
 
 @app.route('/', methods=['POST'])
 def incoming():
-    keyboard = """ 
-    {
-    	"type": "link",
-    	"url": "https://en.wikipedia.org/wiki/Viber",
-    	"title": "Interesting article about Viber",
-    	"thumbnail": "https://www.viber.com/app/uploads/icon-purple.png",
-    	"domain": "www.wikipedia.org",
-    	"width": 480,
-    	"height": 320,
-    	"minApiVersion": 4,
-    	"alternativeUrl": "https://www.egisso.ru",
-    	"alternativeText": "О боте helpegisso"
-    }
-    """
+
     #keyboard=json.dumps(keyboard)
 
     """ 
@@ -94,6 +94,7 @@ def incoming():
 
 
     if isinstance(viber_request, ViberMessageRequest):
+       keyboard = json.dumps(keyboardDict)
        viber.send_messages(to=viber_request.sender.id, messages=[TextMessage(text="".join([viber_request.sender.id," c Вами так интересно"]), keyboard=keyboard)])
 
 
