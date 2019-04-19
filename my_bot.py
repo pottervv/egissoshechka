@@ -42,20 +42,21 @@ def set_webhook(viber):
 
 @app.route('/', methods=['POST'])
 def incoming():
-
-    keyboard={
-	"type": "link",
-	"url": "https://en.wikipedia.org/wiki/Viber",
-	"title": "Interesting article about Viber",
-	"thumbnail": "https://www.viber.com/app/uploads/icon-purple.png",
-	"domain": "www.wikipedia.org",
-	"width": 480,
-	"height": 320,
-	"minApiVersion": 4,
-	"alternativeUrl": "https://www.egisso.ru",
-	"alternativeText": "О боте helpegisso"
-}
-    keyboard=json.dumps(keyboard)
+    keyboard = """ 
+    {
+    	"type": "link",
+    	"url": "https://en.wikipedia.org/wiki/Viber",
+    	"title": "Interesting article about Viber",
+    	"thumbnail": "https://www.viber.com/app/uploads/icon-purple.png",
+    	"domain": "www.wikipedia.org",
+    	"width": 480,
+    	"height": 320,
+    	"minApiVersion": 4,
+    	"alternativeUrl": "https://www.egisso.ru",
+    	"alternativeText": "О боте helpegisso"
+    }
+    """
+    #keyboard=json.dumps(keyboard)
 
     """ 
     tracking_data =  {
@@ -102,6 +103,7 @@ def incoming():
 
 
 if __name__ == "__main__":
+
 
     scheduler = sched.scheduler(time.time, time.sleep)
     scheduler.enter(5, 1, set_webhook, (viber,))
