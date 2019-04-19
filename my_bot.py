@@ -93,8 +93,7 @@ def incoming():
 
 
     if isinstance(viber_request, ViberMessageRequest):
-       viber.send_messages(to=viber_request.sender.id, messages=[TextMessage(text="".join([viber_request.sender," c Вами так интересно"]),
-                                                                             keyboard=keyboard)])
+       viber.send_messages(to=viber_request.sender.id, messages=[TextMessage(text="".join([viber_request.sender.id," c Вами так интересно"]), keyboard=keyboard)])
 
 
     return Response(status=200)
