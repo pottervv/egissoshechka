@@ -101,7 +101,7 @@ def incoming():
 
        keyboard = json.dumps(keyboardDict)
        viber.send_messages(to=viber_request.sender.id,
-                           messages=[TextMessage(keyboard=json.dump({"Type":"keyboard",
+                           messages=[TextMessage(keyboard=json.dumps({"Type":"keyboard",
       "DefaultHeight":True,
       "Buttons":[
          {
