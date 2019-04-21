@@ -59,4 +59,5 @@ def get_current_user():
     return """ <html><body>
     </body></html>"""
 if __name__=="__main__":
-    app.run()
+    get_current_user()
+    #app.run()
