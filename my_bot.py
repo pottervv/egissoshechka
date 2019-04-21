@@ -96,7 +96,7 @@ def incoming():
     if isinstance(viber_request, ViberMessageRequest):
        keyboard = json.dumps(keyboardDict)
        viber.send_messages(to=viber_request.sender.id,
-                           messages=[TextMessage(text="".join([viber_request.get_user().get_name()," "," c Вами так интересно"]))])
+                           messages=[TextMessage(text="C Вами так интересно")])
 
 
     return Response(status=200)
