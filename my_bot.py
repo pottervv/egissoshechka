@@ -107,8 +107,8 @@ def incoming():
          {
             'ActionType':'reply',
             'ActionBody':'reply to me',
-            'Text':'Key text',
-            'TextSize':'regular'
+            'Text':'Key text'
+
          }
       ]}), text="C Вами так интересно", )])
 
