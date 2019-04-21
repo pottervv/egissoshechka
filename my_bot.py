@@ -1,4 +1,4 @@
-from flask import Flask, request, Response, jsonify,json
+from flask import Flask, request, Response, jsonify
 from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
 from viberbot.api.messages import VideoMessage
@@ -101,8 +101,8 @@ def incoming():
 
        keyboard = json.dumps(keyboardDict)
        viber.send_messages(to=viber_request.sender.id,
-                           messages=[TextMessage(keyboard=json.JSONDecoder(""" {"Type":"keyboard",
-      "DefaultHeight":true,
+                           messages=[TextMessage(keyboard=json.dump({"Type":"keyboard",
+      "DefaultHeight":True,
       "Buttons":[
          {
             "ActionType":"reply",
@@ -110,7 +110,7 @@ def incoming():
             "Text":"Key text",
             "TextSize":"regular"
          }
-      ]}"""), text="C Вами так интересно", )])
+      ]}), text="C Вами так интересно", )])
 
 
     return Response(status=200)
