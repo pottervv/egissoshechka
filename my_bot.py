@@ -72,7 +72,7 @@ def incoming():
     if isinstance(viber_request, ViberMessageRequest):
         messages = viber_request.message
         viber.send_messages(to=viber_request.sender.id, messages=[messages])
-        if messages==0:
+        if messages=="0":
             viber.send_messages(to=viber_request.sender.id, messages=[TextMessage(text="Для начинающих")])
 
     return Response(status=200)
