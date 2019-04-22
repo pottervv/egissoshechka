@@ -46,7 +46,7 @@ keyboardDict ={
     "alternativeUrl": "https://www.egisso.ru",
     "alternativeText": "О боте helpegisso"
 }
-#keyboardDict = {"Type": "keyboard", "DefaultHeight": True, "Buttons": [{"ActionType": "reply", "ActionBody": "reply to me"}]}
+#keyboardDict = {"type": "keyboard", "DefaultHeight": True, "Buttons": [{"ActionType": "reply", "ActionBody": "reply to me"}]}
 
 tracking_data = {"type": "text", "text": "Welcome to our bot!"}
 
@@ -85,9 +85,9 @@ def incoming():
         logger.warning("client failed receiving message. failure: {0}".format(viber_request))
 
 
-    if isinstance(viber_request, ViberMessageRequest):
-        keyboard = json.dumps(keyboardDict)
-        viber.send_messages(to=viber_request.sender.id,messages=[TextMessage(keyboard, text="C Вами так интересно", )])
+    # if isinstance(viber_request, ViberMessageRequest):
+    #     keyboard = json.dumps(keyboardDict)
+    #     viber.send_messages(to=viber_request.sender.id,messages=[TextMessage(keyboard, text="C Вами так интересно", )])
 
     if isinstance(viber_request,ViberMessageRequest):
         keyboard = json.dumps(keyboardDict)
