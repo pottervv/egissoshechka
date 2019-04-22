@@ -41,6 +41,27 @@ def set_webhook(viber):
 
 @app.route('/', methods=['POST'])
 def incoming():
+    keyboarddate = {
+        "DefaultHeight": True,
+        "BgColor": "#FFFFFF",
+        "Buttons": [{
+            "Columns": 6,
+            "Rows": 1,
+            "BgColor": "#2db9b9",
+            "BgMediaType": "gif",
+            "BgMedia": "http://www.url.by/test.gif",
+            "BgLoop": True,
+            "ActionType": "open-url",
+            "ActionBody": "www.tut.by",
+            "Image": "www.tut.by/img.jpg",
+            "Text": "Key text",
+            "TextVAlign": "middle",
+            "TextHAlign": "center",
+            "TextOpacity": 60,
+            "TextSize": "regular"
+        }]
+    }
+    keyboard = json.dumps(keyboarddate)
 
     logger.debug("received request. post data: {0}".format(request.get_data()))
     # every viber message is signed, you can verify the signature using this method
@@ -52,7 +73,7 @@ def incoming():
     viber_request = viber.parse_request(request.get_data())
 
     if isinstance(viber_request, ViberConversationStartedRequest):
-        viber.send_messages(viber_request.user.id, [TextMessage(text="Здравствуйте! Вас приветствует бот helpegisso.")])
+        viber.send_messages(viber_request.user.id, [TextMessage(keyboard,text="Здравствуйте! Вас приветствует бот helpegisso.")])
         logger.debug(" viber_request.get_user().get_id()-{0}".format(viber_request.user.id))
 
     if isinstance(viber_request, ViberSubscribedRequest):
@@ -71,29 +92,6 @@ def incoming():
 
     if isinstance(viber_request, ViberMessageRequest):
         messages = viber_request.message
-
-        keyboarddate = {
-		"DefaultHeight": True,
-		"BgColor": "#FFFFFF",
-		"Buttons": [{
-			"Columns": 6,
-			"Rows": 1,
-			"BgColor": "#2db9b9",
-			"BgMediaType": "gif",
-			"BgMedia": "http://www.url.by/test.gif",
-			"BgLoop": True,
-			"ActionType": "open-url",
-			"ActionBody": "www.tut.by",
-			"Image": "www.tut.by/img.jpg",
-			"Text": "Key text",
-			"TextVAlign": "middle",
-			"TextHAlign": "center",
-			"TextOpacity": 60,
-			"TextSize": "regular"
-		}]
-	}
-
-        keyboard=json.dumps(keyboarddate)
         logger.debug("keyboard:{0}".format(keyboard))
         #viber.send_messages(to=viber_request.sender.id, messages=[messages])
         #if messages=="0":
