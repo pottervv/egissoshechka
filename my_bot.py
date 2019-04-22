@@ -47,8 +47,36 @@ keyboardDict ={
     "alternativeText": "О боте helpegisso"
 }
 """
-keyboardDict = {"type": "keyboard", "DefaultHeight": True, "Buttons": [{"ActionType": "reply", "ActionBody": "reply to me"}]}
-keyb={"keyboard":{"DefaultHeight": True,"BgColor":"#FFFFFF"}}
+#keyboardDict = {"type": "keyboard", "DefaultHeight": True, "Buttons": [{"ActionType": "reply", "ActionBody": "reply to me"}]}
+#keyb={"keyboard":{"DefaultHeight": True,"BgColor":"#FFFFFF"}}
+
+keyb={
+	"Type": "keyboard",
+	"Buttons": [{
+		"Columns": 3,
+		"Rows": 2,
+		"Text": "<font color=\"#494E67\">Smoking</font><br><br>",
+		"TextSize": "medium",
+		"TextHAlign": "center",
+		"TextVAlign": "bottom",
+		"ActionType": "reply",
+		"ActionBody": "Smoking",
+		"BgColor": "#f7bb3f",
+		"Image": "https: //s12.postimg.org/ti4alty19/smoke.png"
+	}, {
+		"Columns": 3,
+		"Rows": 2,
+		"Text": "<font color=\"#494E67\">Non Smoking</font><br><br>",
+		"TextSize": "medium",
+		"TextHAlign": "center",
+		"TextVAlign": "bottom",
+		"ActionType": "reply",
+		"ActionBody": "Non smoking",
+		"BgColor": "# f6f7f9",
+		"Image": "https: //s14.postimg.org/us7t38az5/Nonsmoke.png"
+	}]
+}
+
 tracking_data_dict = {"type": "text", "text": "Welcome to our bot!"}
 
 def set_webhook(viber):
@@ -85,15 +113,15 @@ def incoming():
         logger.warning("client failed receiving message. failure: {0}".format(viber_request))
 
 
-    # if isinstance(viber_request, ViberMessageRequest):
-    #     keyboard = json.dumps(keyboardDict)
-    #     viber.send_messages(to=viber_request.sender.id,messages=[TextMessage(keyboard, text="C Вами так интересно", )])
-
-    if isinstance(viber_request,ViberMessageRequest):
+    if isinstance(viber_request, ViberMessageRequest):
         keyboard = json.dumps(keyb)
-        tracking_data=json.dumps(tracking_data_dict)
-        message = KeyboardMessage(tracking_data=tracking_data, keyboard=keyboard)
-        viber.send_messages(to=viber_request.sender.id, messages=[message])
+        viber.send_messages(to=viber_request.sender.id,messages=[TextMessage(keyboard, text="C Вами так интересно", )])
+
+    # if isinstance(viber_request,ViberMessageRequest):
+    #     keyboard = json.dumps(keyb)
+    #     tracking_data=json.dumps(tracking_data_dict)
+    #     message = KeyboardMessage(tracking_data=tracking_data, keyboard=keyboard)
+    #     viber.send_messages(to=viber_request.sender.id, messages=[message])
     return Response(status=200)
 
 
