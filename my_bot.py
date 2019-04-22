@@ -35,19 +35,10 @@ viber = Api(BotConfiguration(
     auth_token='496bdc821627d6e3-89019a2a752a3f08-58f225f6ba43594'
 ))
 
-keyboardDict ={
-    "type": "link",
-    "url": "https://en.wikipedia.org/wiki/Viber",
-    "title": "Interesting article about Viber",
-    "thumbnail": "https://www.viber.com/app/uploads/icon-purple.png",
-    "domain": "www.wikipedia.org",
-    "width": 480,
-    "height": 320,
-    "minApiVersion": 4,
-    "alternativeUrl": "https://www.egisso.ru",
-    "alternativeText": "О боте helpegisso"
-}
+keyboardDict = {"Type": "keyboard", "DefaultHeight": True,
+                "Buttons": [{"ActionType": "reply", "ActionBody": "reply to me"}]}
 
+tracking_data = {"type": "text", "text": "Welcome to our bot!"}
 
 def set_webhook(viber):
     viber.set_webhook('https://egissoshechka.herokuapp.com:443')
@@ -55,20 +46,11 @@ def set_webhook(viber):
 
 @app.route('/', methods=['POST'])
 def incoming():
-
-    #keyboard=json.dumps(keyboard)
-
-    """ 
-    tracking_data =  {
-                "type": "text",
-                "text": "Welcome to our bot!"
-                 }
-    """
-
-
-
+    keyboardDict = {"Type": "keyboard", "DefaultHeight": True,"Buttons": [{"ActionType": "reply", "ActionBody": "reply to me"}]}
+    tracking_data_dict={"type": "text","text": "Welcome to our bot!"}
     logger.debug("received request. post data: {0}".format(request.get_data()))
     # every viber message is signed, you can verify the signature using this method
+
     if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
         return Response(status=403)
 
@@ -94,15 +76,16 @@ def incoming():
 
 
     if isinstance(viber_request, ViberMessageRequest):
-        keyboardDict={"Type":"keyboard","DefaultHeight":True,"Buttons":[{"ActionType":"reply","ActionBody":"reply to me"}]}
-
-
-
         keyboard = json.dumps(keyboardDict)
         viber.send_messages(to=viber_request.sender.id,
                            messages=[TextMessage(keyboard=keyboard, text="C Вами так интересно", )])
 
+    if isinstance(viber_request,ViberMessageRequest):
+        keyboard = json.dumps(keyboardDict)
+        tracking_data=json.dumps(tracking_data_dict)
+        message = KeyboardMessage(tracking_data=tracking_data, keyboard=keyboard)
 
+        viber.send_messages(to=viber_request.sender.id, messages=[message])
     return Response(status=200)
 
 
