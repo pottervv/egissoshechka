@@ -30,7 +30,7 @@ logger.addHandler(handler)
 app = Flask(__name__)
 viber = Api(BotConfiguration(
     name='helpegisso',
-    avatar='http://viber.com/avatar.jpg',
+    avatar='http://egisso.ru/site/img/family.efd5d97b4a8a3b65d467d2ad40303706.png',
     auth_token='496bdc821627d6e3-89019a2a752a3f08-58f225f6ba43594'
 ))
 """
@@ -118,36 +118,8 @@ def incoming():
 
 
     if isinstance(viber_request, ViberMessageRequest):
-        keyboard = json.dumps(keyb)
-        viber.send_messages(to=viber_request.sender.id, messages=[TextMessage(text=viber_request.message)])
-        # if viber_request.message==0:
-        #
-        #      viber.send_messages(to=viber_request.sender.id,
-        #                          messages=[TextMessage(keyboard=keyboard,
-        #                                                text="""Если вы новечек в ЕГИССО нажмите \"1\"
-        #                                                        Если вы хотите просмотреть видео инструкции нажмите \"2\"
-        #                                                        Если Вы хотите вернуться в меню нажмите \"0\"
-        #                                                    """+viber_request.message )])
-        # elif viber_request.message==1:
-        #     viber.send_messages(to=viber_request.sender.id,
-        #                         messages=[TextMessage(keyboard,
-        #                                               text="""Ознакомтесь с  информацией на сайте pfrf.ru
-        #                                                       Если Вы хотите вернуться в меню нажмите \"0\"
-        #                                                                """ )])
-        # elif viber_request.message == 2:
-        #     viber.send_messages(to=viber_request.sender.id,
-        #                         messages=[TextMessage(keyboard,
-        #                                               text=""" Для просмотра видео на тему егиссо  перейдите по ссылке на
-        #                                                        yotube канал HELP.EGISSO
-        #                                                      Если Вы хотите вернуться в меню нажмите \"0\"
-        #                                                                """ )])
-
-
-    # if isinstance(viber_request,ViberMessageRequest):
-    #     keyboard = json.dumps(keyb)
-    #     tracking_data=json.dumps(tracking_data_dict)
-    #     message = KeyboardMessage(tracking_data, keyboard)
-    #     viber.send_messages(to=viber_request.sender.id, messages=[message])
+        messages = TextMessage(text=viber_request.message)
+        viber.send_messages(to=viber_request.sender.id, messages=[messages])
     return Response(status=200)
 
 
