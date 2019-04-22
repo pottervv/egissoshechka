@@ -99,8 +99,7 @@ def incoming():
     viber_request = viber.parse_request(request.get_data())
 
     if isinstance(viber_request, ViberConversationStartedRequest):
-        viber.send_messages(viber_request.user.id, [TextMessage(text=""" Здравствуйте! Вас приветствует бот helpegisso. 
-        Все о мире ЕГИССО. Для вызова меню введите цыфру \"0\"""")])
+        viber.send_messages(viber_request.user.id, [TextMessage(text="".join(["Здравствуйте! Вас приветствует бот helpegisso. ","Все о мире ЕГИССО. Для вызова меню введите цыфру"]))])
         logger.debug(" viber_request.get_user().get_id()-{0}".format(viber_request.user.id))
 
     if isinstance(viber_request, ViberSubscribedRequest):
