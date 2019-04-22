@@ -99,7 +99,8 @@ def incoming():
     viber_request = viber.parse_request(request.get_data())
 
     if isinstance(viber_request, ViberConversationStartedRequest):
-        viber.send_messages(viber_request.user.id, [TextMessage(text="Здравствуйте! Вас приветствует бот helpegisso. Все о мире ЕГИССО")])
+        viber.send_messages(viber_request.user.id, [TextMessage(text=""" Здравствуйте! Вас приветствует бот helpegisso. 
+        Все о мире ЕГИССО. Для вызова меню введите цыфру \"0\"""")])
         logger.debug(" viber_request.get_user().get_id()-{0}".format(viber_request.user.id))
 
     if isinstance(viber_request, ViberSubscribedRequest):
@@ -118,7 +119,27 @@ def incoming():
 
     if isinstance(viber_request, ViberMessageRequest):
         keyboard = json.dumps(keyb)
-        viber.send_messages(to=viber_request.sender.id,messages=[TextMessage(keyboard, text="C Вами так интересно", )])
+        if viber_request.message=='0':
+             viber.send_messages(to=viber_request.sender.id,
+                                 messages=[TextMessage(keyboard,
+                                                       text="""Если вы новечек в ЕГИССО нажмите \"1\"
+                                                               Если вы хотите просмотреть видео инструкции нажмите \"2\"
+                                                               Если Вы хотите вернуться в меню нажмите \"0\"
+                                                           """, )])
+        elif viber_request.message=='1':
+            viber.send_messages(to=viber_request.sender.id,
+                                messages=[TextMessage(keyboard,
+                                                      text="""Ознакомтесь с  информацией на сайте pfrf.ru
+                                                              Если Вы хотите вернуться в меню нажмите \"0\"
+                                                                       """, )])
+        elif viber_request.message == '2':
+            viber.send_messages(to=viber_request.sender.id,
+                                messages=[TextMessage(keyboard,
+                                                      text=""" Для просмотра видео на тему егиссо  перейдите по ссылке на 
+                                                               yotube канал HELP.EGISSO 
+                                                             Если Вы хотите вернуться в меню нажмите \"0\"
+                                                                       """, )])
+
 
     # if isinstance(viber_request,ViberMessageRequest):
     #     keyboard = json.dumps(keyb)
