@@ -71,9 +71,24 @@ def incoming():
 
     if isinstance(viber_request, ViberMessageRequest):
         messages = viber_request.message
+
+        keyboarddate = {
+            "Type": "keyboard",
+            "DefaultHeight": True,
+            "Buttons": [
+                {
+                    "ActionType": "reply",
+                    "ActionBody": "reply to me",
+                    "Text": "Key text",
+                    "TextSize": "regular"
+                }
+            ]
+        }
+
+        keyboard=json.dumps(keyboarddate)
         viber.send_messages(to=viber_request.sender.id, messages=[messages])
         if messages=="0":
-            viber.send_messages(to=viber_request.sender.id, messages=[TextMessage(text="Для начинающих")])
+            viber.send_messages(to=viber_request.sender.id, messages=[TextMessage(keyboard=keyboard, text="Для начинающих")])
 
     return Response(status=200)
 
