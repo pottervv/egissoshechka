@@ -94,6 +94,7 @@ def incoming():
 	}
 
         keyboard=json.dumps(keyboarddate)
+        logger.debug("keyboard:{0}".format(keyboard))
         #viber.send_messages(to=viber_request.sender.id, messages=[messages])
         #if messages=="0":
         viber.send_messages(to=viber_request.sender.id, messages=[TextMessage(keyboard, text="Для начинающих")])
