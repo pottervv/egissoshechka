@@ -49,7 +49,7 @@ keyboardDict ={
 """
 keyboardDict = {"type": "keyboard", "DefaultHeight": True, "Buttons": [{"ActionType": "reply", "ActionBody": "reply to me"}]}
 keyb={"keyboard":{"DefaultHeight": True,"BgColor":"#FFFFFF"}}
-tracking_data = {"type": "text", "text": "Welcome to our bot!"}
+tracking_data_dict = {"type": "text", "text": "Welcome to our bot!"}
 
 def set_webhook(viber):
     viber.set_webhook('https://egissoshechka.herokuapp.com:443')
@@ -57,8 +57,7 @@ def set_webhook(viber):
 
 @app.route('/', methods=['POST'])
 def incoming():
-    keyboardDict = {"Type": "keyboard", "DefaultHeight": True,"Buttons": [{"ActionType": "reply", "ActionBody": "reply to me"}]}
-    tracking_data_dict={"type": "text","text": "Welcome to our bot!"}
+
     logger.debug("received request. post data: {0}".format(request.get_data()))
     # every viber message is signed, you can verify the signature using this method
 
