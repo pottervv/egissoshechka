@@ -94,14 +94,13 @@ def incoming():
 
 
     if isinstance(viber_request, ViberMessageRequest):
-
-        keyb={'Type':'keyboard','DefaultHeight':True,'Buttons':[{'ActionType':'reply','ActionBody':'reply to me',}]}
+        keyboardDict={'Type':'keyboard','DefaultHeight':True,'Buttons':[{'ActionType':'reply','ActionBody':'reply to me',}]}
 
 
 
         keyboard = json.dumps(keyboardDict)
         viber.send_messages(to=viber_request.sender.id,
-                           messages=[TextMessage(keyboard=json.dumps(keyb), text="C Вами так интересно", )])
+                           messages=[TextMessage(keyboard, text="C Вами так интересно", )])
 
 
     return Response(status=200)
