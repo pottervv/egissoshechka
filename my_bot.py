@@ -1,4 +1,4 @@
-from flask import Flask, request, Response, jsonify
+from flask import Flask, request, Response
 from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
 from viberbot.api.messages import VideoMessage
@@ -17,9 +17,8 @@ import time
 import logging
 import sched
 import threading
-#import keyboards
 import json
-import simplejson as s_json
+
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
@@ -35,8 +34,7 @@ viber = Api(BotConfiguration(
     auth_token='496bdc821627d6e3-89019a2a752a3f08-58f225f6ba43594'
 ))
 
-keyboardDict = {"Type": "keyboard", "DefaultHeight": True,
-                "Buttons": [{"ActionType": "reply", "ActionBody": "reply to me"}]}
+keyboardDict = {"Type": "keyboard", "DefaultHeight": True, "Buttons": [{"ActionType": "reply", "ActionBody": "reply to me"}]}
 
 tracking_data = {"type": "text", "text": "Welcome to our bot!"}
 
@@ -77,8 +75,7 @@ def incoming():
 
     if isinstance(viber_request, ViberMessageRequest):
         keyboard = json.dumps(keyboardDict)
-        viber.send_messages(to=viber_request.sender.id,
-                           messages=[TextMessage(keyboard=keyboard, text="C Вами так интересно", )])
+        viber.send_messages(to=viber_request.sender.id,messages=[TextMessage(keyboard=keyboard, text="C Вами так интересно", )])
 
     if isinstance(viber_request,ViberMessageRequest):
         keyboard = json.dumps(keyboardDict)
