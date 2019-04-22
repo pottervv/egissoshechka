@@ -33,7 +33,7 @@ viber = Api(BotConfiguration(
     avatar='http://viber.com/avatar.jpg',
     auth_token='496bdc821627d6e3-89019a2a752a3f08-58f225f6ba43594'
 ))
-
+"""
 keyboardDict ={
     "type": "keyboard",
     "url": "https://en.wikipedia.org/wiki/Viber",
@@ -46,8 +46,9 @@ keyboardDict ={
     "alternativeUrl": "https://www.egisso.ru",
     "alternativeText": "О боте helpegisso"
 }
-#keyboardDict = {"type": "keyboard", "DefaultHeight": True, "Buttons": [{"ActionType": "reply", "ActionBody": "reply to me"}]}
-
+"""
+keyboardDict = {"type": "keyboard", "DefaultHeight": True, "Buttons": [{"ActionType": "reply", "ActionBody": "reply to me"}]}
+keyb={"keyboard":{"DefaultHeight": True,"BgColor":"#FFFFFF"}}
 tracking_data = {"type": "text", "text": "Welcome to our bot!"}
 
 def set_webhook(viber):
