@@ -119,20 +119,20 @@ def incoming():
 
     if isinstance(viber_request, ViberMessageRequest):
         keyboard = json.dumps(keyb)
-        if viber_request.message=='0':
+        if viber_request.message==0:
              viber.send_messages(to=viber_request.sender.id,
                                  messages=[TextMessage(keyboard,
                                                        text="""Если вы новечек в ЕГИССО нажмите \"1\"
                                                                Если вы хотите просмотреть видео инструкции нажмите \"2\"
                                                                Если Вы хотите вернуться в меню нажмите \"0\"
                                                            """, )])
-        elif viber_request.message=='1':
+        elif viber_request.message==1:
             viber.send_messages(to=viber_request.sender.id,
                                 messages=[TextMessage(keyboard,
                                                       text="""Ознакомтесь с  информацией на сайте pfrf.ru
                                                               Если Вы хотите вернуться в меню нажмите \"0\"
                                                                        """, )])
-        elif viber_request.message == '2':
+        elif viber_request.message == 2:
             viber.send_messages(to=viber_request.sender.id,
                                 messages=[TextMessage(keyboard,
                                                       text=""" Для просмотра видео на тему егиссо  перейдите по ссылке на 
