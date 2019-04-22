@@ -41,7 +41,7 @@ def set_webhook(viber):
 
 @app.route('/', methods=['POST'])
 def incoming():
-    keyboarddate = {
+    keyboarddate = {"keyboard":{
         "DefaultHeight": True,
         "BgColor": "#FFFFFF",
         "Buttons": [{
@@ -60,7 +60,7 @@ def incoming():
             "TextOpacity": 60,
             "TextSize": "regular"
         }]
-    }
+    }}
     keyboard = json.dumps(keyboarddate)
 
     logger.debug("received request. post data: {0}".format(request.get_data()))
@@ -73,9 +73,9 @@ def incoming():
     viber_request = viber.parse_request(request.get_data())
 
     if isinstance(viber_request, ViberConversationStartedRequest):
-        viber.send_messages(viber_request.user.id, [TextMessage(keyboard=keyboarddate,text="Здравствуйте! Вас приветствует бот helpegisso.")])
+        viber.send_messages(viber_request.user.id, [TextMessage(keyboard,text="Здравствуйте! Вас приветствует бот helpegisso.")])
         logger.debug(" viber_request.get_user().get_id()-{0}".format(viber_request.user.id))
-
+        logger.debug("keyboard:{0}".format(keyboard))
     if isinstance(viber_request, ViberSubscribedRequest):
              #viber.send_messages(viber_request.user.id, viber_request.get_event_type())
              viber.send_messages(viber_request.user,[TextMessage(text="Спасибо за подписку!")])
