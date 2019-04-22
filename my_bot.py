@@ -94,7 +94,7 @@ def incoming():
 
 
     if isinstance(viber_request, ViberMessageRequest):
-        keyboardDict={'Type':'keyboard','DefaultHeight':True,'Buttons':[{'ActionType':'reply','ActionBody':'reply to me',}]}
+        keyboardDict={"Type":"keyboard","DefaultHeight":True,"Buttons":[{"ActionType":"reply","ActionBody":"reply to me"}]}
 
 
 
