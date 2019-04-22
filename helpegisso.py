@@ -8,10 +8,10 @@ logger = logging.getLogger(__name__)
 
 bot = Bot(
     name='helpegisso',
-    avatar="http://viber.com/avatar.jpg",
+    avatar='http://egisso.ru/site/img/family.efd5d97b4a8a3b65d467d2ad40303706.png',
     auth_token='496bdc821627d6e3-89019a2a752a3f08-58f225f6ba43594',  # Public account auth token
     host="my.host.com",  # should be available from wide area network
-    port=80,
+    port=443,
     webhook="https://egissoshechka.herokuapp.com",  # Webhook url
 )
 

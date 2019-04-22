@@ -59,7 +59,7 @@ def incoming():
             "TextSize": "regular"
         }]
     }
-    keyboard = json.dumps(keyboarddate)
+    keyboard = eval(json.dumps(keyboarddate))
 
     logger.debug("received request. post data: {0}".format(request.get_data()))
     # every viber message is signed, you can verify the signature using this method
@@ -71,7 +71,7 @@ def incoming():
     viber_request = viber.parse_request(request.get_data())
 
     if isinstance(viber_request, ViberConversationStartedRequest):
-        viber.send_messages(viber_request.user.id, [TextMessage(keyboard=keyboard,text="Здравствуйте! Вас приветствует бот helpegisso.")])
+        viber.send_messages(viber_request.user.id, [TextMessage(text="Здравствуйте! Вас приветствует бот helpegisso.")])
         logger.debug(" viber_request.get_user().get_id()-{0}".format(viber_request.user.id))
         logger.debug("keyboard:{0}".format(keyboard))
     if isinstance(viber_request, ViberSubscribedRequest):

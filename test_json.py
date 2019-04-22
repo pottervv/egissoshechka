@@ -28,7 +28,7 @@ app = Flask(__name__)
 			"TextSize": "regular"
 		    }]
 	    }
-        """
+"""
 
 keyboard={"DefaultHeight": True,
 		"BgColor": "#FFFFFF",
@@ -55,9 +55,8 @@ keyboard={"DefaultHeight": True,
 @app.route('/')
 def get_current_user():
     k=s_json.dumps(keyboard)
-    print(k)
-    return """ <html><body>
-    </body></html>"""
+
+	return " <html><body></body></html>"
 if __name__=="__main__":
     get_current_user()
     #app.run()
