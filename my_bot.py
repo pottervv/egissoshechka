@@ -95,7 +95,7 @@ def incoming():
         logger.debug("keyboard:{0}".format(keyboard))
         #viber.send_messages(to=viber_request.sender.id, messages=[messages])
         #if messages=="0":
-        viber.send_messages(to=viber_request.sender.id, messages=[TextMessage(tracking_data=None,keyboard=keyboard, text="Для начинающих")])
+        viber.send_messages(to=viber_request.sender.id, messages=[TextMessage(keyboard, text="Для начинающих")])
 
     return Response(status=200)
 
