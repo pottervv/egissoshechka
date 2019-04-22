@@ -73,17 +73,25 @@ def incoming():
         messages = viber_request.message
 
         keyboarddate = {
-            "Type": "keyboard",
-            "DefaultHeight": True,
-            "Buttons": [
-                {
-                    "ActionType": "reply",
-                    "ActionBody": "reply to me",
-                    "Text": "Key text",
-                    "TextSize": "regular"
-                }
-            ]
-        }
+		"DefaultHeight": True,
+		"BgColor": "#FFFFFF",
+		"Buttons": [{
+			"Columns": 6,
+			"Rows": 1,
+			"BgColor": "#2db9b9",
+			"BgMediaType": "gif",
+			"BgMedia": "http://www.url.by/test.gif",
+			"BgLoop": True,
+			"ActionType": "open-url",
+			"ActionBody": "www.tut.by",
+			"Image": "www.tut.by/img.jpg",
+			"Text": "Key text",
+			"TextVAlign": "middle",
+			"TextHAlign": "center",
+			"TextOpacity": 60,
+			"TextSize": "regular"
+		}]
+	}
 
         keyboard=json.dumps(keyboarddate)
         #viber.send_messages(to=viber_request.sender.id, messages=[messages])
