@@ -120,7 +120,7 @@ def incoming():
     if isinstance(viber_request,ViberMessageRequest):
         keyboard = json.dumps(keyb)
         tracking_data=json.dumps(tracking_data_dict)
-        message = KeyboardMessage(tracking_data=tracking_data, keyboard=keyboard)
+        message = KeyboardMessage(tracking_data, keyboard)
         viber.send_messages(to=viber_request.sender.id, messages=[message])
     return Response(status=200)
 
