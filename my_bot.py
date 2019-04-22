@@ -116,15 +116,15 @@ def incoming():
         logger.warning("client failed receiving message. failure: {0}".format(viber_request))
 
 
-    # if isinstance(viber_request, ViberMessageRequest):
-    #     keyboard = json.dumps(keyb)
-    #     viber.send_messages(to=viber_request.sender.id,messages=[TextMessage(keyboard, text="C Вами так интересно", )])
-
-    if isinstance(viber_request,ViberMessageRequest):
+    if isinstance(viber_request, ViberMessageRequest):
         keyboard = json.dumps(keyb)
-        tracking_data=json.dumps(tracking_data_dict)
-        message = KeyboardMessage(tracking_data, keyboard)
-        viber.send_messages(to=viber_request.sender.id, messages=[message])
+        viber.send_messages(to=viber_request.sender.id,messages=[TextMessage(keyboard, text="C Вами так интересно", )])
+
+    # if isinstance(viber_request,ViberMessageRequest):
+    #     keyboard = json.dumps(keyb)
+    #     tracking_data=json.dumps(tracking_data_dict)
+    #     message = KeyboardMessage(tracking_data, keyboard)
+    #     viber.send_messages(to=viber_request.sender.id, messages=[message])
     return Response(status=200)
 
 
