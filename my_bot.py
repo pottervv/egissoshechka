@@ -73,7 +73,7 @@ def incoming():
     viber_request = viber.parse_request(request.get_data())
 
     if isinstance(viber_request, ViberConversationStartedRequest):
-        viber.send_messages(viber_request.user.id, [TextMessage(keyboard,text="Здравствуйте! Вас приветствует бот helpegisso.")])
+        viber.send_messages(viber_request.user.id, [TextMessage(keyboard=keyboarddate,text="Здравствуйте! Вас приветствует бот helpegisso.")])
         logger.debug(" viber_request.get_user().get_id()-{0}".format(viber_request.user.id))
 
     if isinstance(viber_request, ViberSubscribedRequest):
