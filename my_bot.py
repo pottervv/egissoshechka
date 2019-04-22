@@ -33,54 +33,7 @@ viber = Api(BotConfiguration(
     avatar='http://egisso.ru/site/img/family.efd5d97b4a8a3b65d467d2ad40303706.png',
     auth_token='496bdc821627d6e3-89019a2a752a3f08-58f225f6ba43594'
 ))
-"""
-keyboardDict ={
-    "type": "keyboard",
-    "url": "https://en.wikipedia.org/wiki/Viber",
-    "title": "Interesting article about Viber",
-    "thumbnail": "https://www.viber.com/app/uploads/icon-purple.png",
-    "domain": "www.wikipedia.org",
-    "width": 480,
-    "height": 320,
-    "minApiVersion": 4,
-    "alternativeUrl": "https://www.egisso.ru",
-    "alternativeText": "О боте helpegisso"
-}
-"""
-#keyboardDict = {"type": "keyboard", "DefaultHeight": True, "Buttons": [{"ActionType": "reply", "ActionBody": "reply to me"}]}
-#keyb={"keyboard":{"DefaultHeight": True,"BgColor":"#FFFFFF"}}
 
-keyb={
-	"Type": "keyboard",
-	"Buttons": [{
-		"Columns": 3,
-		"Rows": 2,
-		"Text": "<font color=\"#494E67\">Smoking</font><br><br>",
-		"TextSize": "medium",
-		"TextHAlign": "center",
-		"TextVAlign": "bottom",
-		"ActionType": "reply",
-		"ActionBody": "Smoking",
-		"BgColor": "#f7bb3f",
-		"Image": "https: //s12.postimg.org/ti4alty19/smoke.png"
-	}, {
-		"Columns": 3,
-		"Rows": 2,
-		"Text": "<font color=\"#494E67\">Non Smoking</font><br><br>",
-		"TextSize": "medium",
-		"TextHAlign": "center",
-		"TextVAlign": "bottom",
-		"ActionType": "reply",
-		"ActionBody": "Non smoking",
-		"BgColor": "# f6f7f9",
-		"Image": "https: //s14.postimg.org/us7t38az5/Nonsmoke.png"
-	}]
-}
-
-tracking_data_dict = {
-                      "type": "text",
-                      "text": "Welcome to our bot!"
-                     }
 
 def set_webhook(viber):
     viber.set_webhook('https://egissoshechka.herokuapp.com:443')
@@ -99,7 +52,7 @@ def incoming():
     viber_request = viber.parse_request(request.get_data())
 
     if isinstance(viber_request, ViberConversationStartedRequest):
-        viber.send_messages(viber_request.user.id, [TextMessage(text="".join(["Здравствуйте! Вас приветствует бот helpegisso. ","Все о мире ЕГИССО. Для вызова меню введите цыфру"]))])
+        viber.send_messages(viber_request.user.id, [TextMessage(text="Здравствуйте! Вас приветствует бот helpegisso.")])
         logger.debug(" viber_request.get_user().get_id()-{0}".format(viber_request.user.id))
 
     if isinstance(viber_request, ViberSubscribedRequest):
@@ -117,8 +70,9 @@ def incoming():
 
 
     if isinstance(viber_request, ViberMessageRequest):
-        messages = TextMessage(text=viber_request.message)
+        messages = viber_request.message
         viber.send_messages(to=viber_request.sender.id, messages=[messages])
+
     return Response(status=200)
 
 
