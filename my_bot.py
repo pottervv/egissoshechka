@@ -34,7 +34,19 @@ viber = Api(BotConfiguration(
     auth_token='496bdc821627d6e3-89019a2a752a3f08-58f225f6ba43594'
 ))
 
-keyboardDict = {"Type": "keyboard", "DefaultHeight": True, "Buttons": [{"ActionType": "reply", "ActionBody": "reply to me"}]}
+keyboardDict ={
+    "type": "keyboard",
+    "url": "https://en.wikipedia.org/wiki/Viber",
+    "title": "Interesting article about Viber",
+    "thumbnail": "https://www.viber.com/app/uploads/icon-purple.png",
+    "domain": "www.wikipedia.org",
+    "width": 480,
+    "height": 320,
+    "minApiVersion": 4,
+    "alternativeUrl": "https://www.egisso.ru",
+    "alternativeText": "О боте helpegisso"
+}
+#keyboardDict = {"Type": "keyboard", "DefaultHeight": True, "Buttons": [{"ActionType": "reply", "ActionBody": "reply to me"}]}
 
 tracking_data = {"type": "text", "text": "Welcome to our bot!"}
 
@@ -81,7 +93,6 @@ def incoming():
         keyboard = json.dumps(keyboardDict)
         tracking_data=json.dumps(tracking_data_dict)
         message = KeyboardMessage(tracking_data=tracking_data, keyboard=keyboard)
-
         viber.send_messages(to=viber_request.sender.id, messages=[message])
     return Response(status=200)
 
