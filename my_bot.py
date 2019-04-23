@@ -94,11 +94,11 @@ def incoming():
         logger.debug("keyboard:{0}".format(keyboard))
         #viber.send_messages(to=viber_request.sender.id, messages=[messages])
         #if messages=="0":
-        message_stiker = StickerMessage(sticker_id=40700);
+        message_stiker = StickerMessage(sticker_id=40100);
         message_key = KeyboardMessage(tracking_data=json.dumps({"text":"purga"}), keyboard=keyboard)
         logger.debug("keyboard:{0}".format(keyboard))
-
-        viber.send_messages(to=viber_request.sender.id, messages=[TextMessage(text="Для начинающих"),message_key])
+        text_m=TextMessage(text="Для начинающих")
+        viber.send_messages(to=viber_request.sender.id, messages=[message_key])
 
     return Response(status=200)
 
