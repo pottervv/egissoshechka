@@ -38,7 +38,7 @@ viber = Api(BotConfiguration(
 
 def set_webhook(viber):
     viber.set_webhook('https://egissoshechka.herokuapp.com:443')
-    logging.info("Web hook has been set")
+    logger.info("Web hook has been set")
 
 @app.route('/', methods=['POST'])
 def incoming():
@@ -96,7 +96,7 @@ def incoming():
         #if messages=="0":
         message_stiker = StickerMessage(sticker_id=40100);
         message_key = KeyboardMessage(tracking_data=json.dumps({"text":"purga"}), keyboard=keyboard)
-
+        logger.debug("keyboard:{0}".format(keyboard))
 
         viber.send_messages(to=viber_request.sender.id, messages=[TextMessage(text="Для начинающих"),message_stiker,message_key])
 
