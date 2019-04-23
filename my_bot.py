@@ -95,10 +95,10 @@ def incoming():
         #viber.send_messages(to=viber_request.sender.id, messages=[messages])
         #if messages=="0":
         message_stiker = StickerMessage(sticker_id=40100);
-        message_key = KeyboardMessage(tracking_data={"text":"purga"}, keyboard=keyboard)
+        message_key = KeyboardMessage(tracking_data=json.dumps({"text":"purga"}), keyboard=keyboard)
 
 
-        viber.send_messages(to=viber_request.sender.id, messages=[TextMessage(text="Для начинающих"),message_stiker])
+        viber.send_messages(to=viber_request.sender.id, messages=[TextMessage(text="Для начинающих"),message_stiker,message_key])
 
     return Response(status=200)
 
