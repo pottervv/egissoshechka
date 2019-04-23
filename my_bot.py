@@ -98,7 +98,8 @@ def incoming():
         message_key = KeyboardMessage(tracking_data=json.dumps({"text":"purga"}), keyboard=keyboard)
         logger.debug("keyboard:{0}".format(keyboard))
         #text_m=TextMessage(text="Для начинающих")
-        viber.send_messages(to=viber_request.sender.id, messages=[message_key])
+        account_info = viber.get_account_info()
+        viber.send_messages(to=viber_request.sender.id, messages=[account_info])
 
     return Response(status=200)
 
