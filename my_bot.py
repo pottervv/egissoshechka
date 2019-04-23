@@ -1,4 +1,4 @@
-from flask import Flask, request, Response
+from flask import Flask, request, Response,Request
 from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
 from viberbot.api.messages import VideoMessage
@@ -75,7 +75,6 @@ def incoming():
         logger.debug(" viber_request.get_user().get_id()-{0}".format(viber_request.user.id))
         logger.debug("keyboard:{0}".format(keyboard))
     if isinstance(viber_request, ViberSubscribedRequest):
-             #viber.send_messages(viber_request.user.id, viber_request.get_event_type())
              viber.send_messages(viber_request.user,[TextMessage(text="Спасибо за подписку!")])
              logger.debug("_viber_request.get_event_type():{0}".format(viber_request.get_event_type()))
 
@@ -93,7 +92,7 @@ def incoming():
         logger.debug("keyboard:{0}".format(keyboard))
         #viber.send_messages(to=viber_request.sender.id, messages=[messages])
         #if messages=="0":
-        viber.send_messages(to=viber_request.sender.id, messages=[TextMessage(keyboard=KeyboardMessage.to_dict(keyboard),text="Для начинающих")])
+        viber.send_messages(to=viber_request.sender.id, messages=[TextMessage(keyboard=keyboard,text="Для начинающих")])
 
     return Response(status=200)
 
