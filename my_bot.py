@@ -1,8 +1,9 @@
-from flask import Flask, request, Response,Request
+from flask import Flask, request, Response,Request,jsonify
 from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
 from viberbot.api.messages import VideoMessage
 from viberbot.api.messages.text_message import TextMessage
+from viberbot.api.messages.sticker_message import StickerMessage
 from viberbot.api.messages.keyboard_message import KeyboardMessage
 
 
@@ -93,7 +94,11 @@ def incoming():
         logger.debug("keyboard:{0}".format(keyboard))
         #viber.send_messages(to=viber_request.sender.id, messages=[messages])
         #if messages=="0":
-        viber.send_messages(to=viber_request.sender.id, messages=[TextMessage(keyboard=json.dumps(keyb),text="Для начинающих")])
+        message_stiker = StickerMessage(sticker_id=40100);
+        message_key = KeyboardMessage(tracking_data={"text":"purga"}, keyboard=keyboard)
+
+
+        viber.send_messages(to=viber_request.sender.id, messages=[TextMessage(text="Для начинающих"),message_stiker])
 
     return Response(status=200)
 
