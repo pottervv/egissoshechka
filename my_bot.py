@@ -60,7 +60,7 @@ def incoming():
         }]
     }
     keyboard = json.dumps(keyboarddate)
-    keyb="\"DefaultHeight\": True"
+    keyb={"DefaultHeight": True}
 
     logger.debug("received request. post data: {0}".format(request.get_data()))
     # every viber message is signed, you can verify the signature using this method
@@ -93,7 +93,7 @@ def incoming():
         logger.debug("keyboard:{0}".format(keyboard))
         #viber.send_messages(to=viber_request.sender.id, messages=[messages])
         #if messages=="0":
-        viber.send_messages(to=viber_request.sender.id, messages=[TextMessage(keyboard=keyb,text="Для начинающих")])
+        viber.send_messages(to=viber_request.sender.id, messages=[TextMessage(keyboard=json.dumps(keyb),text="Для начинающих")])
 
     return Response(status=200)
 
