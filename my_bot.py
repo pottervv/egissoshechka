@@ -60,7 +60,7 @@ def incoming():
             "TextSize": "regular"
         }]
     }"""
-    keyboard = keyboarddate
+    keyboard = jsonify(keyboarddate)
     keyb={"DefaultHeight": True}
 
     logger.debug("received request. post data: {0}".format(request.get_data()))
