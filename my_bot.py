@@ -42,7 +42,7 @@ def set_webhook(viber):
 
 @app.route('/', methods=['POST'])
 def incoming():
-    keyboarddate = """{
+    keyboarddate ={
         "DefaultHeight": True,
         "BgColor": "#FFFFFF",
         "Buttons": [{
@@ -59,9 +59,9 @@ def incoming():
             "TextOpacity": 60,
             "TextSize": "regular"
         }]
-    }"""
+    }
     diser = jsonify(keyboarddate)
-    keyboard=json.dumps(diser)
+    keyboard=json.dumps(keyboarddate, indent=4)
     keyb={"DefaultHeight": True}
 
     logger.debug("received request. post data: {0}".format(request.get_data()))
