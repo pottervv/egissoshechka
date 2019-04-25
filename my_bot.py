@@ -60,7 +60,7 @@ def incoming():
             "TextSize": "regular"
         }]
     }"""
-    keyboard = json.loads(keyboarddate)
+    keyboard = keyboarddate
     keyb={"DefaultHeight": True}
 
     logger.debug("received request. post data: {0}".format(request.get_data()))
@@ -97,7 +97,7 @@ def incoming():
         message_stiker = StickerMessage(sticker_id=40100);
         message_key = KeyboardMessage(tracking_data=json.dumps({"text":"purga"}), keyboard=keyboard)
         logger.debug("keyboard:{0}".format(keyboard))
-        text_m=TextMessage(text="Для начинающих",keyboard=keyboard)
+        text_m=TextMessage(keyboard=keyboard, text="Для начинающих")
         account_info = TextMessage(text=str(viber.get_account_info()))
         viber.send_messages(to=viber_request.sender.id, messages=[text_m])
 
