@@ -42,7 +42,7 @@ def set_webhook(viber):
 
 @app.route('/', methods=['POST'])
 def incoming():
-    keyboarddate ="""{
+    keyboarddate ={
         "DefaultHeight": True,
         "BgColor": "#FFFFFF",
         "Buttons": [{
@@ -59,7 +59,7 @@ def incoming():
             "TextOpacity": 60,
             "TextSize": "regular"
         }]
-    }"""
+    }
     diser = jsonify(keyboarddate)
     keyboard=json.dumps(keyboarddate)
     keyb={"DefaultHeight": True}
@@ -92,9 +92,12 @@ def incoming():
 
     if isinstance(viber_request, ViberMessageRequest):
         messages_echo = viber_request.message
-        logger.debug("keyboard:{0}".format(keyboard))
+        #logger.debug("keyboard:{0}".format(keyboard))
         #account_info = TextMessage(text=str(viber_request.sender.name))
         viber.send_messages(to=viber_request.sender.id, messages=[messages_echo])
+        if messages_echo=="\\":
+                text=TextMessage(text="test")
+                viber.send_messages(to=viber_request.sender.id, messages=[text])
         # viber.post_messages_to_public_account(sender=viber_request., messages=[TextMessage(text="sample message")])
 
     return Response(status=200)
