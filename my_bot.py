@@ -93,13 +93,7 @@ def incoming():
     if isinstance(viber_request, ViberMessageRequest):
         messages_echo = viber_request.message
         logger.debug("keyboard:{0}".format(keyboard))
-        #viber.send_messages(to=viber_request.sender.id, messages=[messages])
-        #if messages=="0":
-        message_stiker = StickerMessage(sticker_id=40100);
-        message_key = KeyboardMessage(tracking_data=json.dumps({"text":"purga"}), keyboard=keyboard)
-        logger.debug("keyboard:{0}".format(keyboard))
-        text_m=TextMessage(text="Для начинающих")
-        account_info = TextMessage(text=str(viber_request.sender.name))
+        #account_info = TextMessage(text=str(viber_request.sender.name))
         #viber.send_messages(to=viber_request.sender.id, messages=[text_m])
         viber.post_messages_to_public_account(sender=viber_request.get_sender().get_id(),
                                                        messages=[TextMessage(text="sample message")])
