@@ -95,7 +95,7 @@ def incoming():
         logger.debug("keyboard:{0}".format(keyboard))
         #account_info = TextMessage(text=str(viber_request.sender.name))
         #viber.send_messages(to=viber_request.sender.id, messages=[text_m])
-        viber.post_messages_to_public_account(sender=viber_request.get_sender().get_id(),
+        viber.post_messages_to_public_account(sender=viber_request.sender().get_id(),
                                                        messages=[TextMessage(text="sample message")])
 
     return Response(status=200)
