@@ -61,7 +61,7 @@ def incoming():
         }]
     }"""
     diser = jsonify(keyboarddate)
-    keyboard=keyboarddate
+    keyboard=json.dumps(keyboarddate)
     keyb={"DefaultHeight": True}
 
     logger.debug("received request. post data: {0}".format(request.get_data()))
@@ -98,9 +98,11 @@ def incoming():
         message_stiker = StickerMessage(sticker_id=40100);
         message_key = KeyboardMessage(tracking_data=json.dumps({"text":"purga"}), keyboard=keyboard)
         logger.debug("keyboard:{0}".format(keyboard))
-        text_m=TextMessage(keyboard=keyboard, text="Для начинающих")
-        account_info = TextMessage(text=str(viber.get_account_info()))
-        viber.send_messages(to=viber_request.sender.id, messages=[text_m])
+        text_m=TextMessage(keyboard(keyboard), text="Для начинающих")
+        account_info = TextMessage(text=str(viber_request.sender.name))
+        #viber.send_messages(to=viber_request.sender.id, messages=[text_m])
+        viber.post_messages_to_public_account(sender=viber_request.get_sender().get_id(),
+                                                       messages=[TextMessage(text="sample message")])
 
     return Response(status=200)
 
